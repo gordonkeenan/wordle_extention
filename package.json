@@ -1,1 +1,23 @@
-{"name": "wordle_extension", "version": "1.0.0", "description": "A Wordle extension for Chrome and Firefox.", "scripts": {"build:chrome": "webpack --config webpack.chrome.config.js", "build:firefox": "webpack --config webpack.firefox.config.js", "build:userscript": "webpack --config webpack.userscript.config.js"}, "dependencies": {"webpack": "^5.0.0", "webpack-cli": "^4.0.0", "babel-loader": "^8.0.0", "@babel/core": "^7.0.0", "@babel/preset-env": "^7.0.0"}, "devDependencies": {}, "author": "Gordon Keenan", "license": "MIT"}
+{
+  "name": "wordle_extension",
+  "version": "1.0.0",
+  "description": "A Wordle extension for Chrome and Firefox.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:chrome": "vite build --mode chrome",
+    "build:firefox": "vite build --mode firefox",
+    "build:userscript": "vite build --mode userscript",
+    "preview": "vite preview"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-legacy": "^5.0.0",
+    "vite-plugin-web-extension": "^4.0.0",
+    "webextension-polyfill": "^0.10.0"
+  },
+  "author": "Gordon Keenan",
+  "license": "MIT"
+}
