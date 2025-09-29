@@ -1,0 +1,63 @@
+/* Mobile Responsive Styles for Wordle Debug Panel */
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .debug-panel {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .debug-panel {
+    font-size: 12px;
+  }
+
+  .button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}
+
+/* Touch-Friendly Buttons */
+.button {
+  background-color: #4CAF50; /* Green background */
+  border: none;
+  color: white; /* White text */
+  padding: 15px 32px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Get it to display inline */
+  font-size: 16px; /* Increase font size */
+  margin: 4px 2px; /* Some margin */
+  cursor: pointer; /* Pointer/hand icon */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Proper Sizing for Small Screens */
+.debug-panel {
+  width: 90%; /* Use 90% of the screen width */
+  margin: 0 auto; /* Center the debug panel */
+}
+
+/* Optimized Positioning */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items */
+  justify-content: center; /* Center items */
+  height: 100vh; /* Full viewport height */
+}
