@@ -1,14 +1,19 @@
 {
-  "name": "wordle_extension",
+  "name": "wordle_accessibility_helper",
   "version": "1.0.0",
-  "description": "A Wordle extension for Chrome and Firefox.",
+  "description": "Wordle accessibility tool for dyslexic users and non-native English speakers - highlights valid English words to support learning.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:chrome": "vite build --mode chrome",
+    "build:chrome-dev": "vite build --mode chrome-dev",
     "build:firefox": "vite build --mode firefox",
+    "build:firefox-dev": "vite build --mode firefox-dev",
     "build:userscript": "vite build --mode userscript",
+    "build:userscript-dev": "vite build --mode userscript-dev",
+    "build:all": "npm run build:chrome && npm run build:firefox && npm run build:userscript",
+    "build:all-dev": "npm run build:chrome-dev && npm run build:firefox-dev && npm run build:userscript-dev",
     "preview": "vite preview"
   },
   "dependencies": {},

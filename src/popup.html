@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 350px;
+      padding: 16px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      margin: 0 0 5px 0;
+      font-weight: 600;
+    }
+    
+    .header .subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .status-section {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .status-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .status-label {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+    
+    .status-value {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    
+    .controls-section {
+      margin-bottom: 16px;
+    }
+    
+    .control-group {
+      margin-bottom: 12px;
+    }
+    
+    .control-group:last-child {
+      margin-bottom: 0;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 8px;
+    }
+    
+    .btn:last-child {
+      margin-bottom: 0;
+    }
+    
+    .btn-primary {
+      background: #4CAF50;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #45a049;
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-danger {
+      background: #f44336;
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #da190b;
+    }
+    
+    .toggle-group {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .toggle-group .btn {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    
+    .legend {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+    }
+    
+    .legend-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      margin-right: 8px;
+    }
+    
+    .color-blue { background: #4caf50; }
+    .color-purple { background: #ff9800; }
+    .color-red { background: #f44336; }
+    
+    .loading {
+      display: none;
+      text-align: center;
+      opacity: 0.7;
+      font-size: 12px;
+    }
+    
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      opacity: 0.6;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎯 Accessibility Helper</h1>
+    <div class="subtitle">v1.0 - Learning Support</div>
+  </div>
+
+  <div class="status-section">
+    <div class="status-row">
+      <span class="status-label">Extension Status:</span>
+      <span class="status-value" id="extensionStatus">Active</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Solutions Available:</span>
+      <span class="status-value" id="solutionsCount">-</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Archive Status:</span>
+      <span class="status-value" id="archiveStatus">Not loaded</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Last Update:</span>
+      <span class="status-value" id="lastUpdate">Never</span>
+    </div>
+  </div>
+
+  <div class="controls-section">
+    <div class="control-group">
+      <button class="btn btn-primary" id="togglePanel">Toggle Debug Panel</button>
+    </div>
+    
+    <div class="control-group">
+      <button class="btn btn-secondary" id="fetchArchive">Fetch Archive</button>
+    </div>
+    
+    <div class="control-group">
+      <div class="toggle-group">
+        <button class="btn btn-secondary" id="toggleAutoFetch">Auto-Fetch: ON</button>
+        <button class="btn btn-danger" id="toggleExtension">Disable</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-title">Learning Support Colors:</div>
+    <div class="legend-item">
+      <div class="legend-color color-blue"></div>
+      <span>Valid English word ✓</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-purple"></div>
+      <span>Previous Wordle answer</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-red"></div>
+      <span>Not a valid word ✗</span>
+    </div>
+  </div>
+
+  <div class="loading" id="loading">
+    <div>Loading...</div>
+  </div>
+
+  <div class="footer">
+    Supporting dyslexic users & English learners
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
