@@ -29,8 +29,8 @@
     let archiveStatus = "Archive not loaded";
     let archiveRequested = false;
     
-    // Development-only archive URL
-    const ARCHIVE_URL = isDevelopment ? "https://gist.githubusercontent.com/cfreshman/a03ef2cba789d8cf00c08f767e0fad7b/raw/c46f451920d5cf6326d550fb2d6abb1642717852/wordle-answers-alphabetical.txt" : null;
+    // Development-only archive URL - now enabled for accessibility support in production too
+    const ARCHIVE_URL = "https://gist.githubusercontent.com/cfreshman/a03ef2cba789d8cf00c08f767e0fad7b/raw/c46f451920d5cf6326d550fb2d6abb1642717852/wordle-answers-alphabetical.txt";
 
     // Communication with background script
     function sendMessage(action, data = {}) {
@@ -54,7 +54,7 @@
                 });
             } else if (isDevelopment && message.action === 'toggleDebugPanel') {
                 toggleDebugPanel();
-            } else if (isDevelopment && message.action === 'fetchArchive') {
+            } else if (message.action === 'fetchArchive') {
                 fetchArchive(false, true);
             }
         });
@@ -138,7 +138,7 @@
 
     // Debug panel functionality - only in development
     let panel, toggleBtn, panelPre, autoToggleBtn, fetchBtn;
-    let autoFetchEnabled = isDevelopment;
+    let autoFetchEnabled = true; // Enable auto-fetch for accessibility in both dev and production
 
     if (isDevelopment) {
         // Create debug panel toggle button
@@ -208,14 +208,24 @@
         // This was the "Today's solution" section that showed spoilers
     }
 
-    // Archive fetching - only in development
+    // Load auto-fetch setting for both dev and production (accessibility support)
+    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+        chrome.storage.local.get(['autoFetch'], (result) => {
+            if (result.autoFetch !== undefined) {
+                autoFetchEnabled = result.autoFetch;
+                log('Auto-fetch setting loaded:', autoFetchEnabled);
+            }
+        });
+    }
+
+    // Archive fetching - enabled for accessibility support
     function fetchArchive(auto = false, force = false) {
-        if (!isDevelopment || !ARCHIVE_URL) return;
+        if (!ARCHIVE_URL) return;
         
         if (archiveRequested && !force) return;
         archiveRequested = true;
         archiveStatus = 'Fetching archive...'; 
-        update();
+        if (isDevelopment) update();
         
         fetch(ARCHIVE_URL)
             .then(r => { 
@@ -226,12 +236,39 @@
                 let words = txt.split('\n').map(w => w.trim().toLowerCase()).filter(Boolean);
                 ARCHIVE = new Set(words);
                 archiveStatus = 'Archive loaded: ' + ARCHIVE.size + ' words'; 
-                update();
+                if (isDevelopment) update();
             })
             .catch(err => { 
                 archiveStatus = 'Failed to load archive: ' + (err && err.message ? err.message : String(err)); 
-                update(); 
+                if (isDevelopment) update(); 
             });
+    }
+
+    // Auto-fetch functionality for both dev and production
+    function checkAndAutoFetch() {
+        const rows = getRows();
+        try {
+            if (!archiveRequested && rows && rows.length) {
+                let rendered = false;
+                for (const r of rows) {
+                    try {
+                        const tiles = Array.from(r.children || []);
+                        if (tiles.length >= 5) {
+                            const t0 = tiles[0];
+                            const text = (t0 && (t0.textContent||'').trim()) || '';
+                            if (text.length > 0 || (t0 && typeof t0.offsetParent !== 'undefined' && t0.offsetParent !== null)) { 
+                                rendered = true; 
+                                break; 
+                            }
+                        }
+                    } catch(e){}
+                }
+                if (rendered && autoFetchEnabled) {
+                    log('Auto-fetching archive for accessibility support');
+                    fetchArchive(true);
+                }
+            }
+        } catch (e) {}
     }
 
     function update() {
@@ -339,11 +376,12 @@
         if (current) {
             const g = getGuessFromRow(current).toLowerCase();
             if (g.length === 5) {
-                // Simplified highlighting logic for production
+                // Enhanced highlighting logic for accessibility
                 if (SOLUTIONS.has(g)) {
                     applyClass(current, 'wh-valid');
-                } else if (isDevelopment && ARCHIVE.has(g)) {
-                    applyClass(current, 'wh-past');
+                } else if (ARCHIVE.has(g)) {
+                    // Show past answers in both dev and production for learning support
+                    applyClass(current, isDevelopment ? 'wh-past' : 'wh-valid');
                 } else {
                     applyClass(current, 'wh-invalid');
                 }
@@ -361,6 +399,7 @@
             if (lastObserverRun && (now - lastObserverRun) < 40) return; 
             lastObserverRun = now; 
             if (isDevelopment) update();
+            checkAndAutoFetch(); // Check for auto-fetch in both dev and production
             highlight(); 
         } catch(e){}
     });
@@ -375,6 +414,7 @@
                 if (mutating) return; 
                 if (lastMutated && (Date.now() - lastMutated) < 80) return; 
                 if (isDevelopment) update();
+                checkAndAutoFetch(); // Check for auto-fetch in both dev and production
                 highlight(); 
             } catch(e){} 
         }, 500); 
@@ -383,6 +423,7 @@
     // Initial execution
     try { 
         if (isDevelopment) update();
+        checkAndAutoFetch(); // Initial auto-fetch check
         highlight(); 
     } catch(e){}
 
