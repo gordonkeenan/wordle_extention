@@ -1,5 +1,5 @@
 // Popup script for Wordle extension
-console.log('Wordle extension popup script loaded');
+console.log('Wordle Accessibility Helper popup loaded');
 
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('Popup DOM loaded');

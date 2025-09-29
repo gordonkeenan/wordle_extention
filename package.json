@@ -1,7 +1,7 @@
 {
-  "name": "wordle_extension",
+  "name": "wordle_accessibility_helper",
   "version": "1.0.0",
-  "description": "A Wordle extension for Chrome and Firefox.",
+  "description": "Wordle accessibility tool for dyslexic users and non-native English speakers - highlights valid English words to support learning.",
   "type": "module",
   "scripts": {
     "dev": "vite",

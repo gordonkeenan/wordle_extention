@@ -67,11 +67,11 @@ function buildChromeExtension(isDevelopment) {
   // Chrome extension manifest
   const manifest = {
     "manifest_version": 3,
-    "name": isDevelopment ? "Wordle Debug Extension (DEV)" : "Wordle Helper",
+    "name": isDevelopment ? "Wordle Accessibility Helper (DEV)" : "Wordle Accessibility Helper",
     "version": "1.0.0",
     "description": isDevelopment 
-      ? "Development version of Wordle extension with debugging features"
-      : "Enhance your Wordle experience with smart word validation and helpful hints",
+      ? "Development version - Accessibility tool for dyslexic users and non-native English speakers with debugging features"
+      : "Accessibility tool for Wordle - helps dyslexic users and non-native English speakers identify valid English words for learning support",
     "permissions": [
       "activeTab",
       "storage"
@@ -131,11 +131,11 @@ function buildFirefoxExtension(isDevelopment) {
   // Firefox extension manifest (Manifest V2)
   const manifest = {
     "manifest_version": 2,
-    "name": isDevelopment ? "Wordle Debug Extension (DEV)" : "Wordle Helper",
+    "name": isDevelopment ? "Wordle Accessibility Helper (DEV)" : "Wordle Accessibility Helper",
     "version": "1.0.0",
     "description": isDevelopment 
-      ? "Development version of Wordle extension with debugging features"
-      : "Enhance your Wordle experience with smart word validation and helpful hints",
+      ? "Development version - Accessibility tool for dyslexic users and non-native English speakers with debugging features"
+      : "Accessibility tool for Wordle - helps dyslexic users and non-native English speakers identify valid English words for learning support",
     "permissions": [
       "activeTab",
       "storage",
@@ -199,10 +199,10 @@ function buildUserscript(isDevelopment) {
     const contentScript = readFileSync('src/content.js', 'utf8');
     
     userscriptContent = `// ==UserScript==
-// @name         ${isDevelopment ? 'Wordle Debug Extension (DEV)' : 'Wordle Helper'}
+// @name         ${isDevelopment ? 'Wordle Accessibility Helper (DEV)' : 'Wordle Accessibility Helper'}
 // @namespace    http://tampermonkey.net/
 // @version      1.0.0
-// @description  ${isDevelopment ? 'Development version with debugging features' : 'Enhance your Wordle experience'}
+// @description  ${isDevelopment ? 'Development version - Accessibility tool for dyslexic users and non-native English speakers with debugging features' : 'Accessibility tool for Wordle - helps dyslexic users and non-native English speakers identify valid English words'}
 // @match        https://www.nytimes.com/games/wordle/*
 // @run-at       document-end
 // @grant        none
@@ -211,7 +211,7 @@ function buildUserscript(isDevelopment) {
 ${contentScript.replace(/chrome\.(runtime|storage|tabs)/g, '// $&')}`;
   }
   
-  const filename = isDevelopment ? 'wordle-debug-extension-dev.user.js' : 'wordle-helper.user.js';
+  const filename = isDevelopment ? 'wordle-accessibility-helper-dev.user.js' : 'wordle-accessibility-helper.user.js';
   writeFileSync(`dist/${filename}`, userscriptContent);
   
   console.log(`Userscript built successfully (${isDevelopment ? 'development' : 'production'})!`);

@@ -1,5 +1,5 @@
-// Wordle Helper Extension - Content Script
-// Smart word validation for Wordle gameplay
+// Wordle Accessibility Helper - Content Script
+// Learning support for dyslexic users and non-native English speakers
 
 (function() {
     'use strict';
@@ -12,7 +12,7 @@
     function log(...args) { 
         if (isDevelopment) {
             try { 
-                console.debug.apply(console, ['[Wordle Helper]'].concat(args)); 
+                console.debug.apply(console, ['[Wordle Accessibility]'].concat(args)); 
             } catch(e){} 
         }
     }
@@ -87,18 +87,48 @@
         return filled.length ? filled[filled.length - 1] : null;
     }
 
-    // Inject styles - simplified for production
+    // Inject styles - optimized for dyslexic users and accessibility
     const style = document.createElement('style');
     const productionStyles = `
-        .wh-valid { background-color: #6aaa64 !important; border: 2px solid #6aaa64 !important; color: white !important; }
-        .wh-invalid { background-color: #787c7e !important; border: 2px solid #787c7e !important; color: white !important; }
+        .wh-valid { 
+            background-color: #4caf50 !important; 
+            border: 3px solid #2e7d32 !important; 
+            color: white !important; 
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.4) !important;
+            font-weight: bold !important;
+        }
+        .wh-invalid { 
+            background-color: #f44336 !important; 
+            border: 3px solid #c62828 !important; 
+            color: white !important; 
+            box-shadow: 0 0 8px rgba(244, 67, 54, 0.4) !important;
+            font-weight: bold !important;
+        }
     `;
     
     const developmentStyles = `
-        .wh-valid { background-color: #1e90ff !important; border: 3px solid #1e90ff !important; color: white !important; }
-        .wh-past { background-color: #8a2be2 !important; border: 3px solid #8a2be2 !important; color: white !important; }
-        .wh-invalid { background-color: #b22222 !important; border: 3px solid #b22222 !important; color: white !important; }
-        .wh-panel { position: fixed; top: 60px; right: 12px; background: rgba(0,0,0,0.95); color: #00ff00; padding: 10px; z-index: 2147483647; font-family: monospace; white-space: pre; max-width: 480px; max-height: 50vh; overflow: auto; border-radius: 6px; }
+        .wh-valid { 
+            background-color: #4caf50 !important; 
+            border: 4px solid #2e7d32 !important; 
+            color: white !important; 
+            box-shadow: 0 0 12px rgba(76, 175, 80, 0.6) !important;
+            font-weight: bold !important;
+        }
+        .wh-past { 
+            background-color: #ff9800 !important; 
+            border: 4px solid #ef6c00 !important; 
+            color: white !important; 
+            box-shadow: 0 0 12px rgba(255, 152, 0, 0.6) !important;
+            font-weight: bold !important;
+        }
+        .wh-invalid { 
+            background-color: #f44336 !important; 
+            border: 4px solid #c62828 !important; 
+            color: white !important; 
+            box-shadow: 0 0 12px rgba(244, 67, 54, 0.6) !important;
+            font-weight: bold !important;
+        }
+        .wh-panel { position: fixed; top: 60px; right: 12px; background: rgba(0,0,0,0.95); color: #00ff00; padding: 10px; z-index: 2147483647; font-family: 'Arial', sans-serif; white-space: pre; max-width: 480px; max-height: 50vh; overflow: auto; border-radius: 6px; }
         .wh-toggle { position: fixed; top: 12px; right: 12px; z-index: 2147483647; cursor: pointer; background: rgba(0,0,0,0.85); color: #fff; border: 1px solid #888; padding: 6px 8px; border-radius: 6px; font-size: 14px; user-select: none; }
         .wh-btn { display: inline-block; margin-top: 6px; padding: 4px 6px; background: #333; color: #fff; border: 1px solid #555; cursor: pointer; border-radius: 4px; }
     `;
@@ -228,7 +258,7 @@
             }
         } catch (e) {}
         
-        let text = 'Wordle Helper Debug Panel (DEV)\nLegend: Blue=solution, Purple=past answer, Red=invalid\n\n';
+        let text = 'Wordle Accessibility Helper (DEV)\nLearning Support: Green=valid word, Purple=past answer, Red=invalid\n\n';
         rows.forEach((r,i) => {
             const g = getGuessFromRow(r).toLowerCase();
             let tag = '(empty)';
@@ -356,6 +386,6 @@
         highlight(); 
     } catch(e){}
 
-    log(`Wordle Helper content script loaded (${isDevelopment ? 'development' : 'production'} mode)`);
+    log(`Wordle Accessibility Helper loaded (${isDevelopment ? 'development' : 'production'} mode) - Supporting dyslexic users and English learners`);
 
 })();

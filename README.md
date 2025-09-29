@@ -1,47 +1,126 @@
-# 🟨 Wordle Debug Extension
+# Wordle Accessibility Helper
 
-A powerful browser extension and userscript for debugging and analyzing Wordle games. Features intelligent guess highlighting, solution detection, and comprehensive word validation.
+**An accessibility-focused browser extension designed to support dyslexic users and non-native English speakers playing Wordle.**
 
-## ✨ Features
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-blue?logo=google-chrome)](https://chrome.google.com/webstore)
+[![Firefox Addon](https://img.shields.io/badge/Firefox-Addon-orange?logo=firefox)](https://addons.mozilla.org/firefox)
+[![Userscript](https://img.shields.io/badge/Userscript-Tampermonkey-green)](https://tampermonkey.net/)
 
-- **Smart Guess Highlighting**: Color-coded feedback for your guesses
-  - 🟦 **Blue**: Valid solution words
-  - 🟣 **Purple**: Past Wordle answers  
-  - 🔴 **Red**: Invalid words
-- **Solution Detection**: Automatically detects today's Wordle solution
-- **Archive Integration**: Fetches historical Wordle answers for validation
-- **Debug Panel**: Real-time information about your game state
-- **Multi-Platform**: Supports Chrome, Firefox, and userscript formats
+## 🎯 **Purpose & Accessibility Focus**
 
-## 🚀 Installation
+This extension helps players identify valid English words in Wordle, making the game more accessible and educational for:
+
+- **🧠 Dyslexic users** - Clear visual indicators help distinguish valid words from typos
+- **🌍 Non-native English speakers** - Learning tool to identify real English vocabulary
+- **📚 English learners** - Educational support for vocabulary building
+- **♿ Accessibility needs** - High contrast colors and clear visual feedback
+
+## ✨ **Key Features**
+
+### 🎨 **Visual Learning Support**
+- **Green highlighting** ✅ - Valid English words that are possible Wordle solutions
+- **Red highlighting** ❌ - Invalid words or typing errors  
+- **Orange highlighting** 🟠 - Previously used Wordle answers (development mode)
+- **High contrast colors** - Designed for users with dyslexia and visual processing differences
+- **Bold text** - Enhanced readability for all users
+
+### 🚀 **Real-time Feedback**
+- Instant validation as you type
+- No spoilers or cheating - only validates if words are real English words
+- Educational support without giving away answers
+- Works seamlessly with the official Wordle interface
+
+### 🔧 **Technical Features**
+- Compatible with Chrome, Firefox, and userscript managers
+- Lightweight and fast performance
+- Privacy-focused - no data collection
+- Production builds optimized for Chrome Web Store compliance
+
+## � **Installation**
 
 ### Chrome Extension
+1. Download from Chrome Web Store (coming soon)
+2. Or install from releases: `npm run build:chrome`
+3. Load unpacked extension in Chrome Developer Mode
 
-1. **Build the extension:**
-   ```bash
-   npm install
-   npm run build:chrome
-   ```
+### Firefox Addon  
+1. Download from Firefox Addons (coming soon)
+2. Or build locally: `npm run build:firefox`
+3. Install as temporary addon in Firefox
 
-2. **Load in Chrome:**
-   - Open `chrome://extensions/`
-   - Enable "Developer mode"
-   - Click "Load unpacked"
-   - Select the `dist` folder
+### Userscript (Tampermonkey/Greasemonkey)
+1. Install a userscript manager like [Tampermonkey](https://tampermonkey.net/)
+2. Build userscript: `npm run build:userscript`
+3. Install the generated `.user.js` file
 
-### Firefox Extension
+## 🛠️ **Development**
 
-1. **Build the extension:**
-   ```bash
-   npm install
-   npm run build:firefox
-   ```
+### Build Commands
+```bash
+# Production builds (Chrome Web Store ready)
+npm run build:chrome        # Chrome extension (production)
+npm run build:firefox       # Firefox addon (production)  
+npm run build:userscript    # Userscript (production)
+npm run build:all          # All platforms (production)
 
-2. **Load in Firefox:**
-   - Open `about:debugging`
-   - Click "This Firefox"
-   - Click "Load Temporary Add-on"
-   - Select `dist/manifest.json`
+# Development builds (with debugging features)
+npm run build:chrome-dev    # Chrome extension (development)
+npm run build:firefox-dev   # Firefox addon (development)
+npm run build:userscript-dev # Userscript (development) 
+npm run build:all-dev       # All platforms (development)
+```
+
+### Project Structure
+```
+src/
+├── content.js      # Main accessibility logic
+├── background.js   # Extension lifecycle management
+├── popup.js        # User interface controls
+├── popup.html      # Extension popup interface
+└── styles/         # CSS for mobile and responsive design
+
+dist/               # Built extensions (generated)
+├── manifest.json   # Extension manifest
+├── content.js      # Compiled content script
+├── background.js   # Compiled background script
+└── popup.*         # Compiled popup files
+```
+
+## 🎨 **Accessibility Design Principles**
+
+### Color Choices
+- **Green (#4caf50)** - Universal "correct" indicator, colorblind-friendly
+- **Red (#f44336)** - Clear "error" indicator, high contrast
+- **Orange (#ff9800)** - "Information" color for past answers
+- **High contrast borders** - Enhanced visibility for users with visual processing needs
+
+### Typography & Visual Design
+- **Bold font weights** - Improved readability for dyslexic users
+- **Clear borders** - Distinct visual separation
+- **Subtle shadows** - Enhanced depth perception
+- **Sans-serif fonts** - Better readability for dyslexic users
+
+## 🔒 **Privacy & Security**
+
+- **No data collection** - Extension works entirely locally
+- **No tracking** - Your game data stays private  
+- **Minimal permissions** - Only requests necessary access to Wordle pages
+- **Open source** - Full transparency in functionality
+- **Chrome Web Store compliant** - Meets all store policies
+
+## 🎓 **Educational Benefits**
+
+### For Dyslexic Users
+- Reduces anxiety about word validity
+- Provides immediate visual feedback
+- Helps distinguish real words from letter jumbles
+- Supports pattern recognition learning
+
+### For Non-Native English Speakers
+- Vocabulary building through real-time validation
+- Learning tool for English word patterns
+- Confidence building in English language skills
+- Educational support without revealing answers
 
 ### Userscript (Tampermonkey/Greasemonkey)
 
@@ -198,48 +277,26 @@ You can modify behavior by editing:
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+## 🤝 **Contributing**
 
-**Extension not working:**
-- Refresh the Wordle page
-- Check if extension is enabled
-- Verify you're on the correct Wordle URL
+We welcome contributions that improve accessibility! Areas of focus:
 
-**Colors not showing:**
-- Make sure you've made at least one guess
-- Check that debug panel shows correct status
-- Try toggling the extension off and on
+- Additional language support
+- Enhanced dyslexia-friendly features  
+- Improved color schemes for different types of colorblindness
+- Mobile accessibility improvements
+- Screen reader compatibility
 
-**Archive not loading:**
-- Check network connectivity
-- Try manual fetch from popup
-- Look for error messages in debug panel
+## � **License**
 
-### Support
+MIT License - See [LICENSE](LICENSE) file for details.
 
-1. Check console for error messages (look for `[WDP]` prefix)
-2. Verify extension permissions are granted
-3. Ensure you're on the official Wordle page
-4. Try rebuilding and reloading the extension
+## 🙏 **Acknowledgments**
 
-## 📄 License
+- Inspired by the need for more accessible gaming experiences
+- Built with consideration for dyslexic users and English language learners
+- Designed to complement, not replace, the educational value of Wordle
 
-MIT License - see LICENSE file for details.
+---
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test across all platforms
-5. Submit a pull request
-
-## 📝 Changelog
-
-### v1.0.0
-- Initial release
-- Chrome, Firefox, and userscript support
-- Real-time guess highlighting
-- Solution detection system
-- Archive integration
-- Debug panel interface
+**Made with ♿ accessibility in mind for the dyslexic and English learning communities.**
