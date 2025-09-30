@@ -1,24 +1,34 @@
 // tests/setup.js
 
 // Setup DOM mocking
-import { beforeEach } from 'vitest';
-import { cleanup } from '@testing-library/react';
+import { beforeEach, vi } from 'vitest';
 
 beforeEach(() => {
-    cleanup();
+    // Reset DOM
+    document.body.innerHTML = '';
+    document.head.innerHTML = '';
 });
 
 // Mock Chrome extension API
 global.chrome = {
     runtime: {
-        sendMessage: jest.fn(),
+        sendMessage: vi.fn(() => Promise.resolve()),
         onMessage: {
-            addListener: jest.fn(),
+            addListener: vi.fn(),
+        },
+    },
+    storage: {
+        local: {
+            get: vi.fn((keys, callback) => {
+                if (callback) callback({});
+            }),
+            set: vi.fn((data, callback) => {
+                if (callback) callback();
+            }),
         },
     },
 };
 
-// Global test utilities
-global.testUtils = {
-    // Add your global test utilities here
-};
+// Mock __DEV__ and __PROD__ globals
+global.__DEV__ = true;
+global.__PROD__ = false;
