@@ -13,7 +13,7 @@
         if (isDevelopment) {
             try { 
                 console.debug.apply(console, ['[Wordle Accessibility]'].concat(args)); 
-            } catch(e){} 
+            } catch(_e){} 
         }
     }
 
@@ -72,7 +72,7 @@
             try { 
                 const nodes = document.querySelectorAll(sel); 
                 if (nodes && nodes.length) return Array.from(nodes); 
-            } catch (e) {}
+            } catch (_e) {}
         }
         return [];
     }
@@ -219,7 +219,7 @@
     }
 
     // Archive fetching - enabled for accessibility support
-    function fetchArchive(auto = false, force = false) {
+    function fetchArchive(_auto = false, force = false) {
         if (!ARCHIVE_URL) return;
         
         if (archiveRequested && !force) return;
@@ -261,14 +261,14 @@
                                 break; 
                             }
                         }
-                    } catch(e){}
+                    } catch(_e){}
                 }
                 if (rendered && autoFetchEnabled) {
                     log('Auto-fetching archive for accessibility support');
                     fetchArchive(true);
                 }
             }
-        } catch (e) {}
+        } catch (_e) {}
     }
 
     function update() {
@@ -289,11 +289,11 @@
                                 break; 
                             }
                         }
-                    } catch(e){}
+                    } catch(_e){}
                 }
                 if (rendered && autoFetchEnabled) fetchArchive(true);
             }
-        } catch (e) {}
+        } catch (_e) {}
         
         let text = 'Wordle Accessibility Helper (DEV)\nLearning Support: Green=valid word, Purple=past answer, Red=invalid\n\n';
         rows.forEach((r,i) => {
@@ -330,7 +330,7 @@
             const cs = window.getComputedStyle(p);
             const isHidden = !cs || cs.display === 'none' || cs.visibility === 'hidden' || p.style.display === 'none';
             p.style.display = isHidden ? 'block' : 'none';
-        } catch(e) {}
+        } catch(_e) {}
     }
 
     if (isDevelopment && toggleBtn) {
@@ -391,7 +391,7 @@
     }
 
     // Set up observers and intervals
-    window.__WORDLE_HELPER_OBSERVER__ = new MutationObserver((mutations) => {
+    window.__WORDLE_HELPER_OBSERVER__ = new MutationObserver((_mutations) => {
         try { 
             const now = Date.now(); 
             if (mutating) return; 
@@ -401,12 +401,12 @@
             if (isDevelopment) update();
             checkAndAutoFetch(); // Check for auto-fetch in both dev and production
             highlight(); 
-        } catch(e){}
+        } catch(_e){}
     });
     
     try { 
         window.__WORDLE_HELPER_OBSERVER__.observe(document.documentElement || document.body, { childList:true, subtree:true }); 
-    } catch(e){}
+    } catch(_e){}
 
     try { 
         window.__WORDLE_HELPER_INTERVAL__ = setInterval(() => { 
@@ -416,16 +416,16 @@
                 if (isDevelopment) update();
                 checkAndAutoFetch(); // Check for auto-fetch in both dev and production
                 highlight(); 
-            } catch(e){} 
+            } catch(_e){} 
         }, 500); 
-    } catch(e){}
+    } catch(_e){}
 
     // Initial execution
     try { 
         if (isDevelopment) update();
         checkAndAutoFetch(); // Initial auto-fetch check
         highlight(); 
-    } catch(e){}
+    } catch(_e){}
 
     log(`Wordle Accessibility Helper loaded (${isDevelopment ? 'development' : 'production'} mode) - Supporting dyslexic users and English learners`);
 

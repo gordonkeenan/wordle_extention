@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const date = new Date(timestamp);
             return date.toLocaleTimeString();
-        } catch (e) {
+        } catch (_e) {
             return 'Invalid';
         }
     }
@@ -102,8 +102,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     if (contentState) {
                         extensionState = { ...extensionState, ...contentState };
                     }
-                } catch (e) {
-                    console.log('Could not reach content script:', e);
+                } catch (_e) {
+                    console.log('Could not reach content script:', _e);
                 }
             }
         } catch (error) {

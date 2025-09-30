@@ -9,7 +9,7 @@
 (function() {
     'use strict';
 
-    const SOLUTIONS = [
+    const _SOLUTIONS = [
         // Add the list of solutions here
     ];
 
@@ -29,7 +29,7 @@
     }
 
     // Mutation observer for detecting changes in the game
-    const observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver((_mutations) => {
         // Observer logic here
     });
 
