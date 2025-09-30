@@ -1,20 +1,29 @@
 // tests/setup.js
 
 // Setup DOM mocking
-import { beforeEach } from 'vitest';
-import { cleanup } from '@testing-library/react';
+import { beforeEach, vi } from 'vitest';
 
 beforeEach(() => {
-    cleanup();
+    // Clean up DOM between tests
+    document.body.innerHTML = '';
 });
 
 // Mock Chrome extension API
 global.chrome = {
     runtime: {
-        sendMessage: jest.fn(),
+        sendMessage: vi.fn(),
         onMessage: {
-            addListener: jest.fn(),
+            addListener: vi.fn(),
         },
+    },
+    storage: {
+        local: {
+            get: vi.fn(),
+            set: vi.fn(),
+        },
+    },
+    tabs: {
+        sendMessage: vi.fn(),
     },
 };
 

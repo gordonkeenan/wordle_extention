@@ -1,5 +1,7 @@
 // testUtils.js
 
+import { vi } from 'vitest';
+
 /**
  * Utility functions for testing the Wordle extension.
  */
@@ -25,15 +27,15 @@ function createMockElement(tagName, attributes) {
 function createChromeAPIMock() {
     return {
         runtime: {
-            sendMessage: jest.fn(),
+            sendMessage: vi.fn(),
             onMessage: {
-                addListener: jest.fn(),
+                addListener: vi.fn(),
             },
         },
         storage: {
             local: {
-                set: jest.fn(),
-                get: jest.fn(),
+                set: vi.fn(),
+                get: vi.fn(),
             },
         },
     };
