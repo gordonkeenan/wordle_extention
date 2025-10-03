@@ -31,7 +31,7 @@ npm run preview:presentation
 ```
 
 Then open http://localhost:4173/ in your browser.
-
+adding debugging line
 ## Deployment
 
 The presentation is automatically deployed to GitHub Pages when changes are pushed to the `main` branch. The deployment is handled by the `.github/workflows/deploy-presentation.yml` workflow.
