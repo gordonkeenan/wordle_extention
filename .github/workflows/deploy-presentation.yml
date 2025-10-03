@@ -34,7 +34,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./presentation
+          path: .
 
   # Deployment job (only runs on push to main, not on PRs)
   deploy:
