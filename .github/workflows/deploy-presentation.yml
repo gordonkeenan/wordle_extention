@@ -3,7 +3,7 @@ name: Deploy Presentation to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - '*'
     paths:
       - 'presentation/**'
       - 'vite.config.presentation.js'
