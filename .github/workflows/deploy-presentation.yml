@@ -1,7 +1,7 @@
 name: Deploy Presentation to GitHub Pages
 
 on:
-  push:
+  pull_request:
     branches:
       - '*'
     paths:
