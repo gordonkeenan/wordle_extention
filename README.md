@@ -68,7 +68,12 @@ npm run build:chrome-dev    # Chrome extension (development)
 npm run build:firefox-dev   # Firefox addon (development)
 npm run build:userscript-dev # Userscript (development) 
 npm run build:all-dev       # All platforms (development)
+
+# Presentation builds
+npm run build:presentation   # Build presentation for GitHub Pages
+npm run preview:presentation # Preview presentation locally
 ```
+
 
 ### Project Structure
 ```
@@ -287,7 +292,24 @@ We welcome contributions that improve accessibility! Areas of focus:
 - Mobile accessibility improvements
 - Screen reader compatibility
 
-## � **License**
+## 📊 **Presentation**
+
+A presentation about building this extension with ChatGPT on a phone is available in the `presentation/` folder.
+
+- **View Online**: [GitHub Pages](https://gordonkeenan.github.io/wordle_extention/) (once deployed)
+- **Local Preview**: Run `npm run build:presentation && npm run preview:presentation`
+- **Documentation**: See [presentation/README.md](presentation/README.md)
+
+The presentation includes:
+- Full version with all slides
+- Condensed 7-minute version
+- Wordle-style animated tiles
+- Speaker notes
+- Responsive design
+
+To deploy the presentation to GitHub Pages, see [GITHUB_PAGES_SETUP.md](GITHUB_PAGES_SETUP.md).
+
+## 📄 **License**
 
 MIT License - See [LICENSE](LICENSE) file for details.
 
