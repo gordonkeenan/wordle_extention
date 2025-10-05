@@ -55,6 +55,26 @@ This extension helps players identify valid English words in Wordle, making the 
 
 ## 🛠️ **Development**
 
+### Testing
+
+The project includes comprehensive unit tests:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests once (CI mode)
+npm run test:run
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests with UI
+npm run test:ui
+```
+
+**AI-Powered Test Failure Handling**: This repository includes an automated workflow that uses AI to analyze and fix test failures. When tests fail on a PR, the AI can automatically suggest fixes or create a PR with corrections. See [`.github/workflows/README.md`](.github/workflows/README.md) for details.
+
 ### Build Commands
 ```bash
 # Production builds (Chrome Web Store ready)

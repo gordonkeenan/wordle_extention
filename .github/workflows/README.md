@@ -9,6 +9,54 @@ The workflow provides two modes of operation:
 1. **Comment Mode** (default): When tests fail on a PR, the AI analyzes the failures and posts suggestions as a comment
 2. **Fix Mode**: When manually triggered, the AI analyzes failures, creates fixes, and submits a new PR with the changes
 
+## Workflow Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    PR Created or Manual Trigger                  │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        Test Job                                  │
+│  • Checkout code                                                 │
+│  • Install dependencies                                          │
+│  • Run tests (npm run test:run)                                  │
+│  • Capture test results if failed                                │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │
+                Tests Failed?
+                    │   │
+            ┌───────┘   └───────┐
+            │                   │
+           Yes                  No
+            │                   │
+            ▼                   ▼
+┌─────────────────────┐   ┌─────────────────────┐
+│  Comment Mode       │   │  Workflow Complete  │
+│  (PR triggers)      │   │  All tests passed! │
+│                     │   └─────────────────────┘
+│  • Create AI Issue  │
+│  • AI analyzes      │
+│  • AI comments      │
+│    on PR            │
+└─────────────────────┘
+
+            OR
+
+┌─────────────────────┐
+│  Fix Mode           │
+│  (Manual trigger)   │
+│                     │
+│  • Create AI Issue  │
+│  • AI analyzes      │
+│  • AI creates       │
+│    code fixes       │
+│  • AI submits       │
+│    new PR           │
+└─────────────────────┘
+```
+
 ## How It Works
 
 ### Automatic Trigger (Comment Mode)
@@ -132,3 +180,32 @@ When modifying this workflow:
 2. Validate YAML syntax before committing
 3. Review workflow logs after running
 4. Update this documentation if adding new features
+
+## Quick Reference
+
+### Workflow Triggers
+- **Automatic**: On pull requests to `main` branch
+- **Manual**: Via GitHub Actions UI → "Run workflow" button
+
+### AI Task Labels
+- `ai-task` - Identifies issues created for AI agents
+- `test-failure` - Indicates test failure context
+- `needs-fix` - Used for comment mode
+- `auto-fix` - Used for fix mode
+
+### Key Files
+- `.github/workflows/ai-test-fix.yml` - Main workflow configuration
+- `test-results.txt` - Generated artifact with test failure details
+- `.github/workflows/README.md` - This documentation file
+
+### Useful Commands
+```bash
+# Validate workflow syntax locally
+python3 -c "import yaml; yaml.safe_load(open('.github/workflows/ai-test-fix.yml'))"
+
+# Run tests locally
+npm run test:run
+
+# Check workflow status
+gh run list --workflow=ai-test-fix.yml
+```
