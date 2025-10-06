@@ -179,11 +179,9 @@ const allSlides = {
         notes: [
             "The development workflow became a tight, iterative loop that could be completed in minutes.",
             "Prompt: Describe the feature or fix needed in natural language to ChatGPT.",
-            "Code: Receive the generated code and copy it into the mobile editor.",
-            "Zip: Package the extension files using a mobile file manager.",
-            "Test: Load the extension in mobile Chrome and test the functionality.",
+            "Zip: Recieve the generated code in a Zip file",
+            "Test: Load the extension into Safari tampermonkey plugin.",
             "Patch: Identify issues and start the loop again with a new prompt.",
-            "This rapid cycle made mobile development surprisingly efficient, despite the constraints."
         ]
     },
 
