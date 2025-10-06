@@ -565,6 +565,7 @@ const presentationConfigs = {
         "feature-validation",
         "feature-past-tracking",
         "coding-conversation",
+        "iterative-loop",
         "decision-fatigue",
         "chatgpt-questions",
         "file-size-fight",
@@ -576,7 +577,6 @@ const presentationConfigs = {
         "lessons-learned",
         "productivity-hacks",
         "coding-from-future",
-        "iterative-loop",
         "meta-workflow",
         "best-practices",
         "final-qa"
