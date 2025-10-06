@@ -155,6 +155,36 @@ const allSlides = {
         ]
     },
 
+    "iterative-loop": {
+        id: "iterative-loop",
+        tracker: "LOOP",
+        title: "The Iterative Development Loop",
+        content: `
+            <div class="mt-8 text-xl max-w-3xl mx-auto space-y-6">
+                <p class="font-bold text-green-400">The mobile AI development workflow became a tight iterative loop:</p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-6 text-2xl font-bold">
+                    <div class="px-4 py-2 bg-blue-600/30 border-2 border-blue-400 rounded-lg">Prompt</div>
+                    <div class="text-blue-400">→</div>
+                    <div class="px-4 py-2 bg-green-600/30 border-2 border-green-400 rounded-lg">Code</div>
+                    <div class="text-green-400">→</div>
+                    <div class="px-4 py-2 bg-yellow-600/30 border-2 border-yellow-400 rounded-lg">Zip</div>
+                    <div class="text-yellow-400">→</div>
+                    <div class="px-4 py-2 bg-purple-600/30 border-2 border-purple-400 rounded-lg">Test</div>
+                    <div class="text-purple-400">→</div>
+                    <div class="px-4 py-2 bg-red-600/30 border-2 border-red-400 rounded-lg">Patch</div>
+                </div>
+                <p class="text-sm text-gray-400 mt-6 italic">Each cycle took just minutes, enabling rapid feature iteration entirely from a phone.</p>
+            </div>
+        `,
+        notes: [
+            "The development workflow became a tight, iterative loop that could be completed in minutes.",
+            "Prompt: Describe the feature or fix needed in natural language to ChatGPT.",
+            "Zip: Recieve the generated code in a Zip file",
+            "Test: Load the extension into Safari tampermonkey plugin.",
+            "Patch: Identify issues and start the loop again with a new prompt.",
+        ]
+    },
+
     "final-qa": {
         id: "final-qa",
         tracker: "QUESTIONS",
@@ -522,6 +552,7 @@ const presentationConfigs = {
         "file-size-fight",
         "pivot-pro-code",
         "coding-from-future",
+        "iterative-loop",
         "final-qa"
     ],
     
@@ -534,6 +565,7 @@ const presentationConfigs = {
         "feature-validation",
         "feature-past-tracking",
         "coding-conversation",
+        "iterative-loop",
         "decision-fatigue",
         "chatgpt-questions",
         "file-size-fight",
