@@ -155,6 +155,38 @@ const allSlides = {
         ]
     },
 
+    "iterative-loop": {
+        id: "iterative-loop",
+        tracker: "LOOP",
+        title: "The Iterative Development Loop",
+        content: `
+            <div class="mt-8 text-xl max-w-3xl mx-auto space-y-6">
+                <p class="font-bold text-green-400">The mobile AI development workflow became a tight iterative loop:</p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-6 text-2xl font-bold">
+                    <div class="px-4 py-2 bg-blue-600/30 border-2 border-blue-400 rounded-lg">Prompt</div>
+                    <div class="text-blue-400">→</div>
+                    <div class="px-4 py-2 bg-green-600/30 border-2 border-green-400 rounded-lg">Code</div>
+                    <div class="text-green-400">→</div>
+                    <div class="px-4 py-2 bg-yellow-600/30 border-2 border-yellow-400 rounded-lg">Zip</div>
+                    <div class="text-yellow-400">→</div>
+                    <div class="px-4 py-2 bg-purple-600/30 border-2 border-purple-400 rounded-lg">Test</div>
+                    <div class="text-purple-400">→</div>
+                    <div class="px-4 py-2 bg-red-600/30 border-2 border-red-400 rounded-lg">Patch</div>
+                </div>
+                <p class="text-sm text-gray-400 mt-6 italic">Each cycle took just minutes, enabling rapid feature iteration entirely from a phone.</p>
+            </div>
+        `,
+        notes: [
+            "The development workflow became a tight, iterative loop that could be completed in minutes.",
+            "Prompt: Describe the feature or fix needed in natural language to ChatGPT.",
+            "Code: Receive the generated code and copy it into the mobile editor.",
+            "Zip: Package the extension files using a mobile file manager.",
+            "Test: Load the extension in mobile Chrome and test the functionality.",
+            "Patch: Identify issues and start the loop again with a new prompt.",
+            "This rapid cycle made mobile development surprisingly efficient, despite the constraints."
+        ]
+    },
+
     "final-qa": {
         id: "final-qa",
         tracker: "QUESTIONS",
@@ -522,6 +554,7 @@ const presentationConfigs = {
         "file-size-fight",
         "pivot-pro-code",
         "coding-from-future",
+        "iterative-loop",
         "final-qa"
     ],
     
@@ -545,6 +578,7 @@ const presentationConfigs = {
         "lessons-learned",
         "productivity-hacks",
         "coding-from-future",
+        "iterative-loop",
         "meta-workflow",
         "best-practices",
         "final-qa"
