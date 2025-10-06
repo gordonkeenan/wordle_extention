@@ -59,7 +59,7 @@ const allSlides = {
             <div class="flex flex-col items-center justify-center mt-4">
                 <div class="w-full max-w-3xl mx-auto px-4">
                     <video controls class="w-full h-auto max-h-[50vh] rounded-lg shadow-xl border-2 border-gray-600 mx-auto block" preload="metadata">
-                        <source src="/Users/gkeenan/Downloads/ScreenRecording_10-02-2025 17-30-42_1.mov" type="video/mp4">
+                        <source src="demo.mov" type="video/mp4">
                         <p class="text-red-400">Your browser doesn't support video playback. The demo shows the Wordle extension providing real-time feedback on word validity.</p>
                     </video>
                 </div>
