@@ -1,5 +1,5 @@
 // webpack.chrome.config.js
-const path = require('path');
+const path = require('node:path')
 
 module.exports = {
     entry: {
@@ -16,7 +16,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/, 
+                exclude: /node_modules/,
                 use: 'babel-loader',
             },
             {
@@ -29,4 +29,4 @@ module.exports = {
         extensions: ['.js', '.css'],
     },
     devtool: 'source-map',
-};
+}

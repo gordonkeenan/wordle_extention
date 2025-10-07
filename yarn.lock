@@ -813,6 +813,25 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@biomejs/biome@2.2.5":
+  version "2.2.5"
+  resolved "https://registry.npmjs.org/@biomejs/biome/-/biome-2.2.5.tgz"
+  integrity sha512-zcIi+163Rc3HtyHbEO7CjeHq8DjQRs40HsGbW6vx2WI0tg8mYQOPouhvHSyEnCBAorfYNnKdR64/IxO7xQ5faw==
+  optionalDependencies:
+    "@biomejs/cli-darwin-arm64" "2.2.5"
+    "@biomejs/cli-darwin-x64" "2.2.5"
+    "@biomejs/cli-linux-arm64" "2.2.5"
+    "@biomejs/cli-linux-arm64-musl" "2.2.5"
+    "@biomejs/cli-linux-x64" "2.2.5"
+    "@biomejs/cli-linux-x64-musl" "2.2.5"
+    "@biomejs/cli-win32-arm64" "2.2.5"
+    "@biomejs/cli-win32-x64" "2.2.5"
+
+"@biomejs/cli-linux-x64@2.2.5":
+  version "2.2.5"
+  resolved "https://registry.npmjs.org/@biomejs/cli-linux-x64/-/cli-linux-x64-2.2.5.tgz"
+  integrity sha512-fq9meKm1AEXeAWan3uCg6XSP5ObA6F/Ovm89TwaMiy1DNIwdgxPkNwxlXJX8iM6oRbFysYeGnT0OG8diCWb9ew==
+
 "@csstools/color-helpers@^5.1.0":
   version "5.1.0"
   resolved "https://registry.npmjs.org/@csstools/color-helpers/-/color-helpers-5.1.0.tgz"
@@ -971,6 +990,11 @@
   version "4.52.3"
   resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.52.3.tgz"
   integrity sha512-tPgGd6bY2M2LJTA1uGq8fkSPK8ZLYjDjY+ZLK9WHncCnfIz29LIXIqUgzCR0hIefzy6Hpbe8Th5WOSwTM8E7LA==
+
+"@rollup/rollup-linux-x64-musl@4.52.3":
+  version "4.52.3"
+  resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.52.3.tgz"
+  integrity sha512-BCFkJjgk+WFzP+tcSMXq77ymAPIxsX9lFJWs+2JzuZTLtksJ2o5hvgTdIcZ5+oKzUDMwI0PfWzRBYAydAHF2Mw==
 
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"

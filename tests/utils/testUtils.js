@@ -1,6 +1,6 @@
 // testUtils.js
 
-import { vi } from 'vitest';
+import { vi } from 'vitest'
 
 /**
  * Utility functions for testing the Wordle extension.
@@ -13,11 +13,11 @@ import { vi } from 'vitest';
  * @returns {HTMLElement} The created mock DOM element.
  */
 function createMockElement(tagName, attributes = {}) {
-    const element = document.createElement(tagName);
+    const element = document.createElement(tagName)
     for (const key in attributes) {
-        element.setAttribute(key, attributes[key]);
+        element.setAttribute(key, attributes[key])
     }
-    return element;
+    return element
 }
 
 /**
@@ -26,10 +26,10 @@ function createMockElement(tagName, attributes = {}) {
  * @returns {HTMLElement} The created tile element.
  */
 function createMockTile(letter = '') {
-    const tile = document.createElement('div');
-    tile.className = 'tile';
-    tile.textContent = letter;
-    return tile;
+    const tile = document.createElement('div')
+    tile.className = 'tile'
+    tile.textContent = letter
+    return tile
 }
 
 /**
@@ -38,13 +38,13 @@ function createMockTile(letter = '') {
  * @returns {HTMLElement} The created row element.
  */
 function createMockRow(word = '') {
-    const row = document.createElement('div');
-    row.className = 'row';
-    const letters = word.padEnd(5, '').split('');
-    letters.forEach(letter => {
-        row.appendChild(createMockTile(letter.trim()));
-    });
-    return row;
+    const row = document.createElement('div')
+    row.className = 'row'
+    const letters = word.padEnd(5, '').split('')
+    letters.forEach((letter) => {
+        row.appendChild(createMockTile(letter.trim()))
+    })
+    return row
 }
 
 /**
@@ -53,28 +53,28 @@ function createMockRow(word = '') {
  * @returns {HTMLElement} The created board element.
  */
 function createMockBoard(words = []) {
-    const board = document.createElement('div');
-    board.id = 'wordle-app-game';
-    
-    const container = document.createElement('div');
-    container.className = 'Board-module_boardContainer__TBHNL';
-    
-    const innerContainer = document.createElement('div');
-    
-    words.forEach(word => {
-        innerContainer.appendChild(createMockRow(word));
-    });
-    
+    const board = document.createElement('div')
+    board.id = 'wordle-app-game'
+
+    const container = document.createElement('div')
+    container.className = 'Board-module_boardContainer__TBHNL'
+
+    const innerContainer = document.createElement('div')
+
+    words.forEach((word) => {
+        innerContainer.appendChild(createMockRow(word))
+    })
+
     // Fill remaining rows with empty rows (6 total)
-    const remainingRows = 6 - words.length;
+    const remainingRows = 6 - words.length
     for (let i = 0; i < remainingRows; i++) {
-        innerContainer.appendChild(createMockRow());
+        innerContainer.appendChild(createMockRow())
     }
-    
-    container.appendChild(innerContainer);
-    board.appendChild(container);
-    
-    return board;
+
+    container.appendChild(innerContainer)
+    board.appendChild(container)
+
+    return board
 }
 
 /**
@@ -91,15 +91,15 @@ function createChromeAPIMock() {
         },
         storage: {
             local: {
-                set: vi.fn((data, callback) => {
-                    if (callback) callback();
+                set: vi.fn((_data, callback) => {
+                    if (callback) callback()
                 }),
-                get: vi.fn((keys, callback) => {
-                    if (callback) callback({});
+                get: vi.fn((_keys, callback) => {
+                    if (callback) callback({})
                 }),
             },
         },
-    };
+    }
 }
 
 /**
@@ -107,8 +107,8 @@ function createChromeAPIMock() {
  * @param {HTMLElement} element - The element to click.
  */
 function simulateClick(element) {
-    const event = new MouseEvent('click', { bubbles: true });
-    element.dispatchEvent(event);
+    const event = new MouseEvent('click', { bubbles: true })
+    element.dispatchEvent(event)
 }
 
 /**
@@ -117,15 +117,7 @@ function simulateClick(element) {
  * @returns {Promise} Promise that resolves after the specified time.
  */
 function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-export { 
-    createMockElement, 
-    createMockTile,
-    createMockRow,
-    createMockBoard,
-    createChromeAPIMock, 
-    simulateClick,
-    wait
-};
+export { createMockElement, createMockTile, createMockRow, createMockBoard, createChromeAPIMock, simulateClick, wait }

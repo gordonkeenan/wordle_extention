@@ -68,6 +68,19 @@ npm run build:chrome-dev    # Chrome extension (development)
 npm run build:firefox-dev   # Firefox addon (development)
 npm run build:userscript-dev # Userscript (development) 
 npm run build:all-dev       # All platforms (development)
+
+# Code quality and formatting (using Biome.js)
+npm run lint               # Check for linting issues
+npm run lint:fix           # Auto-fix linting issues
+npm run format             # Check formatting
+npm run format:write       # Auto-format code
+npm run check              # Run both linting and formatting checks
+npm run check:fix          # Auto-fix both linting and formatting issues
+
+# Testing
+npm run test               # Run tests in watch mode
+npm run test:run           # Run tests once
+npm run test:coverage      # Run tests with coverage report
 ```
 
 ### Project Structure
@@ -207,6 +220,17 @@ npm run build:userscript  # Tampermonkey userscript
 # Build all platforms
 npm run build:all
 
+# Code quality (Biome.js)
+npm run lint              # Lint code
+npm run format            # Check code formatting
+npm run check             # Lint + format check
+npm run check:fix         # Auto-fix lint and format issues
+
+# Testing
+npm run test              # Run tests in watch mode
+npm run test:run          # Run tests once
+npm run test:coverage     # Run tests with coverage
+
 # Preview built extension
 npm run preview
 ```
@@ -214,9 +238,21 @@ npm run preview
 ### Development Workflow
 
 1. **Make changes** to source files in `src/`
-2. **Build** using appropriate command
-3. **Reload extension** in browser
-4. **Test** on Wordle page
+2. **Lint and format** code with `npm run check:fix`
+3. **Build** using appropriate command
+4. **Reload extension** in browser
+5. **Test** on Wordle page
+
+### Code Quality
+
+This project uses [Biome.js](https://biomejs.dev/) for fast, modern linting and formatting:
+
+- **Linting**: Catch errors and enforce best practices
+- **Formatting**: Consistent code style across the project
+- **Import Organization**: Automatically sort and organize imports
+- **Fast**: Built in Rust for maximum performance
+
+Configuration is in `biome.json` with sensible defaults matching the project's style.
 
 ### Debugging
 
