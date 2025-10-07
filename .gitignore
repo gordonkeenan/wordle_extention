@@ -2,3 +2,6 @@ node_modules
 dist
 .vscode/
 coverage
+
+# Biome cache
+.biome/

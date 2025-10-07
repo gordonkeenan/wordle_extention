@@ -6,12 +6,10 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
-
-    const SOLUTIONS = [
+;(() => {
+    const _SOLUTIONS = [
         // Add the list of solutions here
-    ];
+    ]
 
     // Function to fetch archived Wordle solutions
     async function fetchArchive() {
@@ -29,20 +27,20 @@
     }
 
     // Mutation observer for detecting changes in the game
-    const observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver((_mutations) => {
         // Observer logic here
-    });
+    })
 
     // Interval checking functionality
     setInterval(() => {
         // Interval logic here
-    }, 1000);
+    }, 1000)
 
     // Initial execution
     window.onload = () => {
-        setupDebugPanel();
-        highlightGuesses();
-        fetchArchive();
-        observer.observe(document.body, { childList: true, subtree: true });
-    };
-})();
+        setupDebugPanel()
+        highlightGuesses()
+        fetchArchive()
+        observer.observe(document.body, { childList: true, subtree: true })
+    }
+})()
