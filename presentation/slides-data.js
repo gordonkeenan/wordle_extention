@@ -264,11 +264,11 @@ const allSlides = {
         content: `
             <div class="flex flex-col md:flex-row gap-8 justify-center mt-8">
                 <div class="w-full md:w-1/3 demo-box demo-blue">
-                    <h3 class="text-4xl font-extrabold mb-2">BLUE BOX</h3>
+                    <h3 class="text-4xl font-extrabold mb-2">BLUE Outline</h3>
                     <p class="text-xl">Word is a valid guess **AND** could potentially be the correct answer word.</p>
                 </div>
                 <div class="w-full md:w-1/3 demo-box demo-red">
-                    <h3 class="text-4xl font-extrabold mb-2">RED BOX</h3>
+                    <h3 class="text-4xl font-extrabold mb-2">RED Outline</h3>
                     <p class="text-xl">Word is **NOT** a valid guess word in the Wordle dictionary.</p>
                 </div>
             </div>
@@ -284,11 +284,11 @@ const allSlides = {
     "feature-past-tracking": {
         id: "feature-past-tracking",
         tracker: "PAST",
-        title: "Feature 2: Tracking Past Answers (Purple)",
+        title: "Feature 2: Tracking Past Answers",
         content: `
             <div class="flex flex-col items-center justify-center mt-8">
                 <div class="w-full md:w-1/2 demo-box demo-purple">
-                    <h3 class="text-4xl font-extrabold mb-2">PURPLE BOX</h3>
+                    <h3 class="text-4xl font-extrabold mb-2">PURPLE Outline</h3>
                     <p class="text-xl">Word was a **previous Wordle answer** and won't be used again.</p>
                 </div>
                 <p class="mt-6 text-gray-400 text-xl">Saved you from wasting a guess on a word that's already been used.</p>
