@@ -6,6 +6,17 @@
 [![Firefox Addon](https://img.shields.io/badge/Firefox-Addon-orange?logo=firefox)](https://addons.mozilla.org/firefox)
 [![Userscript](https://img.shields.io/badge/Userscript-Tampermonkey-green)](https://tampermonkey.net/)
 
+## 📊 **Presentation Framework**
+
+This repository now includes the **Preso Framework** - a modern, React-based presentation system built from the original vanilla JS presentation code.
+
+**👉 [View Framework Documentation](./README-PRESO.md)**
+
+- [Templates Guide](./TEMPLATES.md)
+- [Modules Guide](./MODULES.md)
+- [DSL Reference](./DSL.md)
+- [Migration Guide](./MIGRATION.md)
+
 ## 🎯 **Purpose & Accessibility Focus**
 
 This extension helps players identify valid English words in Wordle, making the game more accessible and educational for:

@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Wordle accessibility tool for dyslexic users and non-native English speakers - highlights valid English words to support learning.",
   "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -18,7 +23,8 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "build:packages": "npm run build --workspace=packages/preso-core --workspace=packages/preso-react --workspace=packages/preso-modules"
   },
   "dependencies": {},
   "devDependencies": {
@@ -29,7 +35,8 @@
     "vitest": "^1.6.0",
     "@vitest/ui": "^1.6.0",
     "@vitest/coverage-v8": "^1.6.0",
-    "jsdom": "^24.1.0"
+    "jsdom": "^24.1.0",
+    "typescript": "^5.3.3"
   },
   "author": "Gordon Keenan",
   "license": "MIT"

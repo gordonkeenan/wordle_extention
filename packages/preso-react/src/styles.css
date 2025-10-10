@@ -1,0 +1,75 @@
+/* Preso React Stylesheet */
+
+:root {
+  --preso-color-primary: #6aaa64;
+  --preso-color-secondary: #c9b458;
+  --preso-color-background: #121212;
+  --preso-color-text: #ffffff;
+  --preso-color-accent: #787c7e;
+  --preso-font-heading: Inter, sans-serif;
+  --preso-font-body: Inter, sans-serif;
+  --preso-font-mono: monospace;
+}
+
+.preso-root {
+  width: 100%;
+  height: 100%;
+  background-color: var(--preso-color-background);
+  color: var(--preso-color-text);
+  font-family: var(--preso-font-body);
+}
+
+.preso-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.preso-slide-header {
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--preso-color-accent);
+  padding-bottom: 1rem;
+}
+
+.preso-slide-title {
+  font-family: var(--preso-font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--preso-color-primary);
+  margin: 0;
+}
+
+.preso-slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.preso-template-error {
+  padding: 2rem;
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 2px solid red;
+  border-radius: 0.5rem;
+}
+
+.preso-template-error pre {
+  font-family: var(--preso-font-mono);
+  font-size: 0.875rem;
+  overflow-x: auto;
+}
+
+.preso-error {
+  padding: 2rem;
+  text-align: center;
+  color: red;
+  font-size: 1.5rem;
+}
+
+.preso-plugin-container {
+  width: 100%;
+  height: 100%;
+}
