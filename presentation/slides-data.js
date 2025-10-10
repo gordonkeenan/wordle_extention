@@ -643,7 +643,7 @@ const allSlides = {
                             <li>Use git branch to test changes</li>
                             <li>Always review code changes</li>
                             <li>Try different models</li>
-                            <li>Use basic models for simple tasks if running out of credits</li>
+                            <li>Use basic models for simple tasks</li>
                             <li>Experiment with different tools</li>
                             <li>Restart chat if it starts to become a loop</li>
                         </ul>
