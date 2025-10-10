@@ -13,11 +13,10 @@ let currentSlideIndex = 0;
 let isPresentationStarted = false;
 
 // Utility function to get tile color based on position
-function getTileColor(letter, index, word) {
-    // Simple coloring logic for visual appeal based on position (for non-final slides)
-    if (index === 0 || index === 4) return 'wordle-green';
-    if (index === 1 || index === 3) return 'wordle-yellow';
-    return 'wordle-gray';
+function getTileColor() {
+    // Randomize coloring logic for visual appeal
+    const colors = ['wordle-green', 'wordle-yellow', 'wordle-gray'];
+    return colors[Math.floor(Math.random() * colors.length)];
 }
 
 // Render tracker with dynamic configurations
@@ -199,12 +198,7 @@ function renderSlide(index) {
         notesList.innerHTML = slide.notes.map(note => `<li>${note}</li>`).join('');
     }
     
-    // Check if this slide has snark and trigger it after 3 seconds
-    if (slide.snark) {
-        setTimeout(() => {
-            showSnarkOverlay(slide.snark);
-        }, 3000);
-    }
+    // Snark is now triggered manually by spacebar (removed automatic timer)
 }
 
 // Function to make question tiles fall and pile up
@@ -255,6 +249,21 @@ function showSnarkOverlay(snarkText, isLarge = false) {
         clearInterval(window.snarkTypeInterval);
         window.snarkTypeInterval = null;
     }
+    
+    // Add click-to-close functionality
+    const closeSnarkOverlay = () => {
+        overlay.classList.remove('active', 'glitching');
+        if (window.snarkTypeInterval) {
+            clearInterval(window.snarkTypeInterval);
+            window.snarkTypeInterval = null;
+        }
+        // Remove the event listener after closing to avoid duplicates
+        overlay.removeEventListener('click', closeSnarkOverlay);
+    };
+    
+    // Remove any existing listeners and add new one
+    overlay.removeEventListener('click', closeSnarkOverlay);
+    overlay.addEventListener('click', closeSnarkOverlay);
     
     // Split text into lines (support for \n or array of lines)
     let lines = [];
@@ -430,6 +439,23 @@ function setupKeyboardListeners() {
             if (currentSlideIndex === 0 && !isPresentationStarted) {
                 startPresentation();
                 return;
+            }
+            
+            // Check if current slide has snark and show it when spacebar is pressed
+            const slides = window.presentationSlides || [];
+            const currentSlide = slides[currentSlideIndex];
+            if (currentSlide && currentSlide.snark) {
+                const overlay = document.getElementById('snark-overlay');
+                // Toggle snark overlay: show if hidden, hide if visible
+                if (overlay.classList.contains('active')) {
+                    overlay.classList.remove('active', 'glitching');
+                    if (window.snarkTypeInterval) {
+                        clearInterval(window.snarkTypeInterval);
+                        window.snarkTypeInterval = null;
+                    }
+                } else {
+                    showSnarkOverlay(currentSlide.snark);
+                }
             }
             
             // Remove normal slide advancement with spacebar - only arrows now
