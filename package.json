@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "npm run build --workspaces",
+    "build": "npm run build:packages",
+    "build:packages": "npm run build --workspace=@preso/core --workspace=@preso/react --workspace=@preso/modules --workspace=@preso/templates --workspace=@preso/cli",
     "build:chrome": "vite build --mode chrome",
     "build:chrome-dev": "vite build --mode chrome-dev",
     "build:firefox": "vite build --mode firefox",
@@ -24,7 +25,8 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:all": "npm run test --workspaces"
+    "test:all": "npm run test --workspaces",
+    "studio": "npm run dev --workspace=@preso/studio"
   },
   "dependencies": {},
   "devDependencies": {
