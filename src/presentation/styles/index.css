@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wordle-dark: #121212;
+  --color-wordle-light: #ffffff;
+  --color-wordle-green: #6aaa64;
+  --color-wordle-yellow: #c9b458;
+  --color-wordle-gray: #787c7e;
+  --font-family-sans: 'Inter', sans-serif;
+}
+
+/* Tracker Tile Styles */
+.tracker-tile {
+  @apply w-7 h-7 sm:w-10 sm:h-10 flex items-center justify-center font-bold text-lg sm:text-2xl rounded shadow-md transition-all duration-300;
+  margin: 0 2px;
+}
+
+/* Custom Wordle Animations */
+@keyframes flip-in {
+  0% { 
+    transform: scale(0) rotateX(-90deg); 
+    opacity: 0; 
+  }
+  100% { 
+    transform: scale(1) rotateX(0deg); 
+    opacity: 1; 
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { 
+    transform: translateY(0); 
+  }
+  40% { 
+    transform: translateY(-15px); 
+  }
+  60% { 
+    transform: translateY(-10px); 
+  }
+}
+
+@keyframes propagandaPulse {
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+  50% { 
+    transform: scale(1.1); 
+    opacity: 0.8; 
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    transform: translateX(-5px);
+    opacity: 0.3;
+  }
+  20% {
+    transform: translateX(5px);
+    opacity: 0.6;
+  }
+  30% {
+    transform: translateX(-5px);
+    opacity: 0.9;
+  }
+  40% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: #ffffff;
+    opacity: 0;
+  }
+}
+
+.animated-tile {
+  animation: flip-in 0.6s ease-out forwards;
+}
+
+.bounce-animation {
+  animation: bounce 1s ease-in-out;
+}
+
+.glitching {
+  animation: glitch 2s ease-in-out forwards;
+}
+
+.propaganda-pulse {
+  animation: propagandaPulse 2s infinite;
+}
+
+/* Faded Grid Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  background-image: 
+    linear-gradient(to right, #4a4a4a 1px, transparent 1px),
+    linear-gradient(to bottom, #4a4a4a 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
