@@ -1,0 +1,128 @@
+/* Preso React Component Styles */
+
+:root {
+  /* Default theme variables */
+  --colors-primary: #6aaa64;
+  --colors-secondary: #c9b458;
+  --colors-background: #121212;
+  --colors-text: #ffffff;
+  --colors-error: #f44336;
+  
+  --fonts-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --fonts-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --fonts-mono: Monaco, Consolas, 'Courier New', monospace;
+  
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+}
+
+/* Root presentation container */
+.preso-root {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--colors-background);
+  color: var(--colors-text);
+  font-family: var(--fonts-body);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Viewport for slides */
+.preso-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+/* Slide host */
+.slide-host {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.slide-title h1 {
+  font-family: var(--fonts-heading);
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: var(--spacing-lg);
+  color: var(--colors-primary);
+}
+
+.slide-content {
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Template host */
+.template-host {
+  width: 100%;
+}
+
+/* Plugin host */
+.plugin-host {
+  margin: var(--spacing-md) 0;
+}
+
+/* Controls */
+.preso-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preso-control-button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--colors-primary);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preso-control-button:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--colors-primary) 80%, black);
+  transform: translateY(-2px);
+}
+
+.preso-control-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.preso-slide-counter {
+  font-size: 1rem;
+  color: var(--colors-text);
+  font-weight: 600;
+}
+
+/* Speaker notes (hidden by default) */
+.slide-notes {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slide-title h1 {
+    font-size: 2rem;
+  }
+  
+  .slide-content {
+    font-size: 1.25rem;
+  }
+  
+  .preso-viewport {
+    padding: var(--spacing-md);
+  }
+}
