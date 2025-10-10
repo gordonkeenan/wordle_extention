@@ -1,4 +1,125 @@
-# Wordle Accessibility Helper
+# Wordle Extension & Presentation System
+
+This is a **monorepo** containing:
+1. **Wordle Accessibility Helper** - A browser extension for dyslexic users and English learners
+2. **Preso** - A modern presentation system built with TypeScript and React
+
+## 📦 Packages
+
+### Core Libraries
+
+- **[@preso/core](packages/preso-core)** - TypeScript presentation engine with types, validation, and parsers
+- **[@preso/react](packages/preso-react)** - React components for presentations
+- **[@preso/modules](packages/preso-modules)** - Plugin modules (SnarkTerminalBox, etc.)
+- **[@preso/templates](packages/preso-templates)** - Built-in presentation templates
+- **[@preso/cli](packages/preso-cli)** - CLI tool for presentation management
+
+### Applications
+
+- **[studio](apps/studio)** - Web-based presentation editor and preview tool
+- **[presentation-port](apps/presentation-port)** - Ported "Couch Coding" presentation
+
+## 🚀 Quick Start
+
+### Install Dependencies
+
+```bash
+npm install --legacy-peer-deps
+```
+
+### Build All Packages
+
+```bash
+# Build core packages
+cd packages/preso-core && npm run build
+cd packages/preso-react && npm run build
+cd packages/preso-modules && npm run build
+cd packages/preso-templates && npm run build
+cd packages/preso-cli && npm run build
+```
+
+### Run Studio App
+
+```bash
+cd apps/studio
+npm run dev
+```
+
+Open http://localhost:3000 to edit and preview presentations.
+
+### Build Wordle Extension
+
+```bash
+# From repository root
+npm run build:chrome      # Chrome extension
+npm run build:firefox     # Firefox addon
+npm run build:userscript  # Tampermonkey userscript
+```
+
+## 📚 Documentation
+
+- **[TEMPLATES.md](TEMPLATES.md)** - Creating custom presentation templates
+- **[MODULES.md](MODULES.md)** - Building plugin modules
+- **[DSL.md](DSL.md)** - DeckSpec format and usage
+- **[MIGRATION.md](MIGRATION.md)** - Migrating from old presentation system
+
+## 🎨 Preso Presentation System
+
+### What is Preso?
+
+Preso is a modern, TypeScript-first presentation system that lets you:
+- Define presentations in declarative JSON (DeckSpec)
+- Create reusable templates and themes
+- Build plugin modules for custom functionality
+- Edit presentations visually in the studio app
+- Export to various formats
+
+### Example DeckSpec
+
+```json
+{
+  "version": "1.0.0",
+  "metadata": {
+    "title": "My Presentation",
+    "author": "Your Name"
+  },
+  "theme": {
+    "name": "default",
+    "vars": {
+      "colors": {
+        "primary": "#6aaa64"
+      }
+    }
+  },
+  "slides": [
+    {
+      "id": "intro",
+      "title": "Welcome",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Hello World"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### CLI Usage
+
+```bash
+# Validate a deck
+preso validate deck.json
+
+# List available templates
+preso list templates
+
+# List available plugins
+preso list plugins
+```
+
+## ♿ Wordle Accessibility Helper
 
 **An accessibility-focused browser extension designed to support dyslexic users and non-native English speakers playing Wordle.**
 

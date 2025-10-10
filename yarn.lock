@@ -1019,6 +1019,12 @@
     react "^18.2.0"
     react-dom "^18.2.0"
 
+"@preso/templates@file:/home/runner/work/wordle_extention/wordle_extention/packages/preso-templates":
+  version "0.1.0"
+  resolved "file:packages/preso-templates"
+  dependencies:
+    "@preso/core" "*"
+
 "@rolldown/pluginutils@1.0.0-beta.27":
   version "1.0.0-beta.27"
   resolved "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.0.0-beta.27.tgz"
