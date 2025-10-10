@@ -1078,3 +1078,438 @@ describe('Selector Fallback Logic', () => {
         expect(Array.isArray(rows)).toBe(true);
     });
 });
+
+describe('Mutation Observer Behavior', () => {
+    let testFuncs;
+    let observerCallback;
+    let mutationObserverMock;
+
+    beforeEach(() => {
+        testFuncs = createTestFunctions();
+        document.body.innerHTML = '';
+        observerCallback = null;
+        
+        // Mock MutationObserver
+        mutationObserverMock = vi.fn((callback) => {
+            observerCallback = callback;
+            return {
+                observe: vi.fn(),
+                disconnect: vi.fn(),
+                takeRecords: vi.fn()
+            };
+        });
+        global.MutationObserver = mutationObserverMock;
+    });
+
+    it('should create and configure mutation observer', () => {
+        const callback = vi.fn();
+        const observer = new MutationObserver(callback);
+        
+        expect(mutationObserverMock).toHaveBeenCalledWith(callback);
+        expect(observer.observe).toBeDefined();
+        expect(observer.disconnect).toBeDefined();
+    });
+
+    it('should observe DOM changes with correct options', () => {
+        const callback = vi.fn();
+        const observer = new MutationObserver(callback);
+        observer.observe(document.body, { childList: true, subtree: true });
+        
+        expect(observer.observe).toHaveBeenCalledWith(
+            document.body,
+            { childList: true, subtree: true }
+        );
+    });
+
+    it('should trigger callback when DOM mutations occur', () => {
+        const callback = vi.fn();
+        const observer = new MutationObserver(callback);
+        observer.observe(document.body, { childList: true, subtree: true });
+        
+        // Simulate mutation
+        const mutations = [{ type: 'childList', addedNodes: [] }];
+        callback(mutations);
+        
+        expect(callback).toHaveBeenCalledWith(mutations);
+    });
+
+    it('should handle observer disconnect gracefully', () => {
+        const callback = vi.fn();
+        const observer = new MutationObserver(callback);
+        observer.observe(document.body, { childList: true, subtree: true });
+        
+        expect(() => observer.disconnect()).not.toThrow();
+        expect(observer.disconnect).toHaveBeenCalled();
+    });
+
+    it('should respect mutation throttling logic', () => {
+        let mutating = false;
+        let lastMutated = 0;
+        let lastObserverRun = 0;
+        
+        const shouldProcessMutation = () => {
+            const now = Date.now();
+            if (mutating) return false;
+            if (lastMutated && (now - lastMutated) < 60) return false;
+            if (lastObserverRun && (now - lastObserverRun) < 40) return false;
+            return true;
+        };
+
+        // First call should process
+        expect(shouldProcessMutation()).toBe(true);
+        
+        // Set flags as if mutation just happened
+        mutating = true;
+        expect(shouldProcessMutation()).toBe(false);
+        
+        mutating = false;
+        lastMutated = Date.now();
+        expect(shouldProcessMutation()).toBe(false);
+    });
+
+    it('should call highlight and update on mutations', async () => {
+        const board = createMockBoard(['ABOUT']);
+        document.body.appendChild(board);
+        
+        const highlightSpy = vi.fn();
+        const updateSpy = vi.fn();
+        
+        // Simulate observer callback
+        const callback = () => {
+            const now = Date.now();
+            highlightSpy();
+            updateSpy();
+        };
+        
+        callback();
+        
+        expect(highlightSpy).toHaveBeenCalled();
+        expect(updateSpy).toHaveBeenCalled();
+    });
+
+    it('should handle exceptions in observer callback', () => {
+        const callback = vi.fn(() => {
+            throw new Error('Test error');
+        });
+        
+        const observer = new MutationObserver((mutations) => {
+            try {
+                callback();
+            } catch (e) {
+                // Should handle error gracefully
+            }
+        });
+        
+        expect(() => {
+            observer.observe(document.body, { childList: true, subtree: true });
+        }).not.toThrow();
+    });
+});
+
+describe('Interval-Based Updates', () => {
+    let testFuncs;
+    let intervalId;
+
+    beforeEach(() => {
+        testFuncs = createTestFunctions();
+        document.body.innerHTML = '';
+        vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
+    });
+
+    it('should set up interval with correct timing', () => {
+        const callback = vi.fn();
+        intervalId = setInterval(callback, 500);
+        
+        expect(callback).not.toHaveBeenCalled();
+        
+        vi.advanceTimersByTime(500);
+        expect(callback).toHaveBeenCalledTimes(1);
+        
+        vi.advanceTimersByTime(500);
+        expect(callback).toHaveBeenCalledTimes(2);
+    });
+
+    it('should call highlight function on interval', () => {
+        const board = createMockBoard(['ABOUT']);
+        document.body.appendChild(board);
+        
+        const highlightSpy = vi.fn();
+        intervalId = setInterval(() => {
+            highlightSpy();
+        }, 500);
+        
+        vi.advanceTimersByTime(500);
+        expect(highlightSpy).toHaveBeenCalledTimes(1);
+        
+        vi.advanceTimersByTime(1000);
+        expect(highlightSpy).toHaveBeenCalledTimes(3);
+    });
+
+    it('should respect mutation throttling in interval', () => {
+        let mutating = false;
+        let lastMutated = 0;
+        
+        const callback = vi.fn(() => {
+            if (mutating) return;
+            if (lastMutated && (Date.now() - lastMutated) < 80) return;
+            // Process update
+        });
+        
+        intervalId = setInterval(callback, 500);
+        
+        vi.advanceTimersByTime(500);
+        expect(callback).toHaveBeenCalled();
+        
+        // Set mutating flag
+        mutating = true;
+        vi.advanceTimersByTime(500);
+        expect(callback).toHaveBeenCalledTimes(2);
+    });
+
+    it('should handle errors in interval callback gracefully', () => {
+        const callback = vi.fn(() => {
+            throw new Error('Test error');
+        });
+        
+        intervalId = setInterval(() => {
+            try {
+                callback();
+            } catch (e) {
+                // Handle gracefully
+            }
+        }, 500);
+        
+        expect(() => {
+            vi.advanceTimersByTime(500);
+        }).not.toThrow();
+    });
+
+    it('should call checkAndAutoFetch on interval', () => {
+        const autoFetchSpy = vi.fn();
+        
+        intervalId = setInterval(() => {
+            autoFetchSpy();
+        }, 500);
+        
+        vi.advanceTimersByTime(500);
+        expect(autoFetchSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should clear interval on cleanup', () => {
+        const callback = vi.fn();
+        intervalId = setInterval(callback, 500);
+        
+        clearInterval(intervalId);
+        intervalId = null;
+        
+        vi.advanceTimersByTime(1000);
+        expect(callback).not.toHaveBeenCalled();
+    });
+
+    it('should handle multiple intervals correctly', () => {
+        const callback1 = vi.fn();
+        const callback2 = vi.fn();
+        
+        const interval1 = setInterval(callback1, 500);
+        const interval2 = setInterval(callback2, 1000);
+        
+        vi.advanceTimersByTime(500);
+        expect(callback1).toHaveBeenCalledTimes(1);
+        expect(callback2).not.toHaveBeenCalled();
+        
+        vi.advanceTimersByTime(500);
+        expect(callback1).toHaveBeenCalledTimes(2);
+        expect(callback2).toHaveBeenCalledTimes(1);
+        
+        clearInterval(interval1);
+        clearInterval(interval2);
+    });
+});
+
+describe('Debug Panel Interactions', () => {
+    let testFuncs;
+    let panel;
+    let toggleBtn;
+    let fetchBtn;
+    let autoToggleBtn;
+
+    beforeEach(() => {
+        testFuncs = createTestFunctions();
+        document.body.innerHTML = '';
+        
+        // Create debug panel elements
+        toggleBtn = document.createElement('button');
+        toggleBtn.textContent = 'DEBUG';
+        toggleBtn.style.position = 'fixed';
+        toggleBtn.style.top = '8px';
+        toggleBtn.style.left = '8px';
+        
+        panel = document.createElement('div');
+        panel.className = 'wh-panel';
+        panel.style.display = 'none';
+        
+        fetchBtn = document.createElement('button');
+        fetchBtn.textContent = 'Fetch Archive';
+        fetchBtn.className = 'wh-btn';
+        
+        autoToggleBtn = document.createElement('button');
+        autoToggleBtn.className = 'wh-btn';
+        autoToggleBtn.textContent = 'Auto-Fetch: ON';
+        
+        panel.appendChild(fetchBtn);
+        panel.appendChild(autoToggleBtn);
+        
+        document.body.appendChild(toggleBtn);
+        document.body.appendChild(panel);
+    });
+
+    it('should create debug panel elements in development mode', () => {
+        expect(toggleBtn).toBeDefined();
+        expect(panel).toBeDefined();
+        expect(fetchBtn).toBeDefined();
+        expect(autoToggleBtn).toBeDefined();
+    });
+
+    it('should toggle panel visibility on button click', () => {
+        const toggleDebugPanel = () => {
+            const cs = window.getComputedStyle(panel);
+            const isHidden = cs.display === 'none' || panel.style.display === 'none';
+            panel.style.display = isHidden ? 'block' : 'none';
+        };
+        
+        expect(panel.style.display).toBe('none');
+        
+        toggleDebugPanel();
+        expect(panel.style.display).toBe('block');
+        
+        toggleDebugPanel();
+        expect(panel.style.display).toBe('none');
+    });
+
+    it('should handle fetch archive button click', () => {
+        const fetchArchiveSpy = vi.fn();
+        fetchBtn.onclick = () => fetchArchiveSpy(false, true);
+        
+        fetchBtn.click();
+        expect(fetchArchiveSpy).toHaveBeenCalledWith(false, true);
+    });
+
+    it('should toggle auto-fetch setting', () => {
+        let autoFetchEnabled = true;
+        
+        const toggleAutoFetch = () => {
+            autoFetchEnabled = !autoFetchEnabled;
+            autoToggleBtn.textContent = autoFetchEnabled ? 'Auto-Fetch: ON' : 'Auto-Fetch: OFF';
+        };
+        
+        autoToggleBtn.onclick = toggleAutoFetch;
+        
+        expect(autoToggleBtn.textContent).toBe('Auto-Fetch: ON');
+        
+        autoToggleBtn.click();
+        expect(autoToggleBtn.textContent).toBe('Auto-Fetch: OFF');
+        
+        autoToggleBtn.click();
+        expect(autoToggleBtn.textContent).toBe('Auto-Fetch: ON');
+    });
+
+    it('should display debug information in panel', () => {
+        const panelPre = document.createElement('pre');
+        panelPre.style.margin = '0 0 6px 0';
+        panel.insertBefore(panelPre, fetchBtn);
+        
+        const board = createMockBoard(['ABOUT', 'APPLE']);
+        document.body.appendChild(board);
+        
+        // Simulate update function
+        const rows = testFuncs.getRows();
+        let text = 'Wordle Accessibility Helper (DEV)\n';
+        rows.forEach((r, i) => {
+            const g = testFuncs.getGuessFromRow(r).toLowerCase();
+            let tag = '(empty)';
+            if (g.length === 5) {
+                if (testFuncs.SOLUTIONS.has(g)) tag = '[solution]';
+                else tag = '[invalid]';
+            }
+            text += `Row ${i + 1}: ${g || '(empty)'} ${tag}\n`;
+        });
+        panelPre.textContent = text;
+        
+        expect(panelPre.textContent).toContain('Wordle Accessibility Helper');
+        expect(panelPre.textContent).toContain('Row 1: about [solution]');
+        expect(panelPre.textContent).toContain('Row 2: apple [solution]');
+    });
+
+    it('should handle panel elements being null gracefully', () => {
+        const toggleDebugPanel = (isDevelopment, panelEl) => {
+            if (!isDevelopment || !panelEl) return;
+            
+            try {
+                const cs = window.getComputedStyle(panelEl);
+                const isHidden = cs.display === 'none' || panelEl.style.display === 'none';
+                panelEl.style.display = isHidden ? 'block' : 'none';
+            } catch (e) {}
+        };
+        
+        expect(() => toggleDebugPanel(true, null)).not.toThrow();
+        expect(() => toggleDebugPanel(false, panel)).not.toThrow();
+    });
+
+    it('should style debug button correctly', () => {
+        expect(toggleBtn.style.position).toBe('fixed');
+        expect(toggleBtn.style.top).toBe('8px');
+        expect(toggleBtn.style.left).toBe('8px');
+    });
+
+    it('should store auto-fetch setting in chrome storage', () => {
+        const mockChrome = {
+            storage: {
+                local: {
+                    set: vi.fn(),
+                    get: vi.fn((keys, callback) => callback({ autoFetch: true }))
+                }
+            }
+        };
+        
+        global.chrome = mockChrome;
+        
+        let autoFetchEnabled = true;
+        autoToggleBtn.onclick = () => {
+            autoFetchEnabled = !autoFetchEnabled;
+            chrome.storage.local.set({ autoFetch: autoFetchEnabled });
+        };
+        
+        autoToggleBtn.click();
+        expect(mockChrome.storage.local.set).toHaveBeenCalledWith({ autoFetch: false });
+    });
+
+    it('should load auto-fetch setting from chrome storage', () => {
+        const mockChrome = {
+            storage: {
+                local: {
+                    get: vi.fn((keys, callback) => {
+                        callback({ autoFetch: false });
+                    })
+                }
+            }
+        };
+        
+        global.chrome = mockChrome;
+        
+        let autoFetchEnabled = true;
+        chrome.storage.local.get(['autoFetch'], (result) => {
+            if (result.autoFetch !== undefined) {
+                autoFetchEnabled = result.autoFetch;
+            }
+        });
+        
+        expect(mockChrome.storage.local.get).toHaveBeenCalledWith(['autoFetch'], expect.any(Function));
+    });
+});

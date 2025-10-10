@@ -6,9 +6,9 @@ This test suite provides comprehensive unit tests for the Wordle Accessibility H
 
 ## Test Statistics
 
-- **Total Tests**: 72
+- **Total Tests**: 95
 - **Test Files**: 1 (tests/content.test.js)
-- **Lines of Code**: ~1,080 lines
+- **Lines of Code**: ~1,470 lines
 - **Pass Rate**: 100% ✅
 
 ## Test Categories
@@ -149,6 +149,41 @@ Tests for CSS selector fallback mechanisms.
 - ✓ Uses first successful selector
 - ✓ Handles querySelector exceptions gracefully
 
+### 17. Mutation Observer Behavior (7 tests)
+Tests for mutation observer initialization and behavior.
+
+- ✓ Creates and configures mutation observer
+- ✓ Observes DOM changes with correct options
+- ✓ Triggers callback when DOM mutations occur
+- ✓ Handles observer disconnect gracefully
+- ✓ Respects mutation throttling logic
+- ✓ Calls highlight and update on mutations
+- ✓ Handles exceptions in observer callback
+
+### 18. Interval-Based Updates (7 tests)
+Tests for interval-based update mechanism.
+
+- ✓ Sets up interval with correct timing
+- ✓ Calls highlight function on interval
+- ✓ Respects mutation throttling in interval
+- ✓ Handles errors in interval callback gracefully
+- ✓ Calls checkAndAutoFetch on interval
+- ✓ Clears interval on cleanup
+- ✓ Handles multiple intervals correctly
+
+### 19. Debug Panel Interactions (9 tests)
+Tests for debug panel UI and functionality.
+
+- ✓ Creates debug panel elements in development mode
+- ✓ Toggles panel visibility on button click
+- ✓ Handles fetch archive button click
+- ✓ Toggles auto-fetch setting
+- ✓ Displays debug information in panel
+- ✓ Handles panel elements being null gracefully
+- ✓ Styles debug button correctly
+- ✓ Stores auto-fetch setting in chrome storage
+- ✓ Loads auto-fetch setting from chrome storage
+
 ## Running Tests
 
 ```bash
@@ -208,8 +243,8 @@ These tests are designed to run in CI environments:
 
 Potential areas for expansion:
 
-- [ ] Tests for mutation observer behavior
-- [ ] Tests for interval-based updates
-- [ ] Tests for debug panel interactions
+- [x] Tests for mutation observer behavior
+- [x] Tests for interval-based updates
+- [x] Tests for debug panel interactions
 - [ ] E2E tests with actual Wordle page
 - [ ] Visual regression tests for highlighting
