@@ -1,0 +1,20 @@
+{
+  "name": "@preso/templates",
+  "version": "0.1.0",
+  "description": "Built-in presentation templates",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "dependencies": {
+    "@preso/core": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vitest": "^1.6.0"
+  }
+}
