@@ -2,8 +2,8 @@
 
 // Global variables that can be overridden by specific presentations
 window.presentationConfig = {
-    totalSlides: 22, // Default for full presentation
-    finalSlideIndex: 21, // Default for full presentation (0-indexed)
+    totalSlides: 21, // Default for full presentation
+    finalSlideIndex: 20, // Default for full presentation (0-indexed)
     slidesVersion: 'full', // Default version
     imageSource: "IMG_5384.jpg" // Default image source
 };
@@ -181,7 +181,7 @@ function renderSlide(index) {
 
         // Slide Title and Tracker
         contentDiv.innerHTML = `
-            <div class="flex flex-col items-center mb-10">
+            <div class="flex flex-col items-center">
                 <h2 class="text-4xl md:text-5xl font-bold text-center text-white mb-6 leading-tight">${slide.title}</h2>
                 <div class="flex justify-center" id="tracker-display">${renderTracker(slide.tracker, index)}</div>
             </div>
@@ -205,6 +205,43 @@ function renderSlide(index) {
             showSnarkOverlay(slide.snark);
         }, 3000);
     }
+}
+
+// Function to make question tiles fall and pile up
+function triggerFallingTiles() {
+    // Try multiple selectors to find the tracker
+    const trackerContainer = document.querySelector('#tracker-display') || 
+                            document.querySelector('.tracker-container') ||
+                            document.querySelector('[id*="tracker"]');
+    
+    if (!trackerContainer) {
+        console.warn('Tracker container not found');
+        return;
+    }
+    
+    const tiles = trackerContainer.querySelectorAll('.tracker-tile');
+    if (tiles.length === 0) {
+        console.warn('No tracker tiles found');
+        return;
+    }
+    
+    console.log(`Triggering fall animation for ${tiles.length} tiles`);
+    
+    // Get the position of each tile before making them fixed
+    tiles.forEach((tile, index) => {
+        const rect = tile.getBoundingClientRect();
+        
+        // Clone the tile styling and position it at its current location
+        tile.style.left = rect.left + 'px';
+        tile.style.top = rect.top + 'px';
+        tile.style.width = rect.width + 'px';
+        tile.style.height = rect.height + 'px';
+        
+        // Add falling class with a slight delay for stagger effect
+        setTimeout(() => {
+            tile.classList.add('falling');
+        }, 50); // Small delay to ensure position is set
+    });
 }
 
 // Snark overlay function
@@ -308,7 +345,7 @@ function showSnarkOverlay(snarkText, isLarge = false) {
                     // Remove overlay completely after glitch animation
                     setTimeout(() => {
                         overlay.classList.remove('active', 'glitching');
-                    }, 2000);
+                    }, 2200); // Match the glitch animation duration (2.2s)
                 }, 1000); // Wait 1 second after typing completes
             } else {
                 staticCursor.classList.add('show');

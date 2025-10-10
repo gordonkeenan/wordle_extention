@@ -127,7 +127,7 @@ body {
     opacity: 0;
     transform: translateX(-50px);
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    overflow-y: auto;
+    overflow: hidden;
     line-height: 1.4;
 }
 
@@ -181,70 +181,111 @@ body {
     51%, 100% { opacity: 0; }
 }
 
-/* Glitch effect for meta-workflow */
+/* Glitch effect for meta-workflow with dramatic disintegration ending */
 @keyframes glitch {
     0% { 
-        transform: translateX(0);
-        filter: hue-rotate(0deg);
-    }
-    10% { 
-        transform: translateX(-2px);
-        filter: hue-rotate(90deg);
-    }
-    20% { 
-        transform: translateX(2px);
-        filter: hue-rotate(180deg);
-    }
-    30% { 
-        transform: translateX(-1px);
-        filter: hue-rotate(270deg);
-    }
-    40% { 
-        transform: translateX(1px);
-        filter: hue-rotate(360deg);
-    }
-    50% { 
-        transform: translateX(-2px);
-        background-color: #ff0000;
-        border-color: #ff0000;
-        color: #ffffff;
-    }
-    60% { 
-        transform: translateX(2px);
-        background-color: #ff0000;
-        border-color: #ff0000;
-        color: #ffffff;
-    }
-    70% { 
-        transform: translateX(-1px);
-        background-color: #ff0000;
-        border-color: #ff0000;
-        color: #ffffff;
-    }
-    80% { 
-        transform: translateX(1px);
-        background-color: #ff0000;
-        border-color: #ff0000;
-        color: #ffffff;
-    }
-    90% { 
-        transform: translateX(0);
-        background-color: #ff0000;
-        border-color: #ff0000;
-        color: #ffffff;
+        transform: translateX(0) scale(1) rotate(0deg);
+        filter: hue-rotate(0deg) blur(0px);
         opacity: 1;
     }
-    100% { 
-        transform: translateX(0);
+    10% { 
+        transform: translateX(-3px) scale(1) rotate(0deg);
+        filter: hue-rotate(90deg) blur(0px);
+    }
+    20% { 
+        transform: translateX(3px) scale(1) rotate(0deg);
+        filter: hue-rotate(180deg) blur(0px);
+    }
+    30% { 
+        transform: translateX(-2px) scale(1) rotate(0deg);
+        filter: hue-rotate(270deg) blur(0px);
+    }
+    40% { 
+        transform: translateX(2px) scale(1) rotate(0deg);
+        filter: hue-rotate(360deg) blur(0px);
+    }
+    50% { 
+        transform: translateX(-3px) scale(1) rotate(0deg);
         background-color: #ff0000;
         border-color: #ff0000;
         color: #ffffff;
+        filter: blur(0px);
+    }
+    60% { 
+        transform: translateX(3px) scale(1) rotate(0deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(0px);
+    }
+    65% { 
+        transform: translateX(-5px) translateY(-5px) scale(1.05) rotate(3deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(2px);
+        opacity: 0.95;
+    }
+    70% { 
+        transform: translateX(5px) translateY(-10px) scale(1.15) rotate(-5deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(4px) brightness(1.2);
+        opacity: 0.9;
+    }
+    75% { 
+        transform: translate(-10px, -20px) scale(1.25) rotate(10deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(6px) brightness(1.5);
+        opacity: 0.8;
+    }
+    80% { 
+        transform: translate(10px, -35px) scale(1.4) rotate(-15deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(10px) brightness(2);
+        opacity: 0.65;
+    }
+    85% { 
+        transform: translate(-15px, -55px) scale(1.6) rotate(25deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(15px) brightness(2.5);
+        opacity: 0.45;
+    }
+    90% { 
+        transform: translate(20px, -80px) scale(1.9) rotate(-40deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(25px) brightness(3);
+        opacity: 0.25;
+    }
+    95% { 
+        transform: translate(-30px, -120px) scale(2.3) rotate(60deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(40px) brightness(4);
+        opacity: 0.1;
+    }
+    100% { 
+        transform: translate(40px, -150px) scale(2.8) rotate(-90deg);
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #ffffff;
+        filter: blur(50px) brightness(5);
         opacity: 0;
     }
 }
 
 .snark-overlay.glitching {
-    animation: glitch 2s ease-in-out forwards;
+    animation: glitch 2.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 .snark-overlay.glitching .snark-line {
@@ -258,6 +299,72 @@ body {
     position: absolute;
     top: 16px;
     left: 16px;
+}
+
+/* Falling question tiles animation */
+@keyframes fallAndTumble {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        top: calc(100vh - 60px) !important;
+        transform: rotate(var(--rotation)) scale(1);
+        opacity: 1;
+    }
+}
+
+.tracker-tile.falling {
+    position: fixed !important;
+    animation: fallAndTumble 1s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+    z-index: 10000;
+}
+
+/* Stagger the landing positions to create a pile effect */
+.tracker-tile.falling:nth-child(1) { 
+    animation-delay: 0s;
+    --rotation: -12deg;
+    margin-left: -15px;
+}
+.tracker-tile.falling:nth-child(2) { 
+    animation-delay: 0.08s;
+    --rotation: 8deg;
+    margin-left: 10px;
+}
+.tracker-tile.falling:nth-child(3) { 
+    animation-delay: 0.16s;
+    --rotation: -5deg;
+    margin-left: -5px;
+}
+.tracker-tile.falling:nth-child(4) { 
+    animation-delay: 0.24s;
+    --rotation: 15deg;
+    margin-left: 18px;
+}
+.tracker-tile.falling:nth-child(5) { 
+    animation-delay: 0.32s;
+    --rotation: -8deg;
+    margin-left: -12px;
+}
+.tracker-tile.falling:nth-child(6) { 
+    animation-delay: 0.4s;
+    --rotation: 3deg;
+    margin-left: 5px;
+}
+.tracker-tile.falling:nth-child(7) { 
+    animation-delay: 0.48s;
+    --rotation: -10deg;
+    margin-left: -8px;
+}
+.tracker-tile.falling:nth-child(8) { 
+    animation-delay: 0.56s;
+    --rotation: 12deg;
+    margin-left: 15px;
+}
+.tracker-tile.falling:nth-child(9) { 
+    animation-delay: 0.64s;
+    --rotation: -6deg;
+    margin-left: -3px;
 }
 
 .snark-content {

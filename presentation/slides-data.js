@@ -72,7 +72,7 @@ const allSlides = {
                         <p class="text-red-400">Your browser doesn't support video playback. The demo shows the Wordle extension providing real-time feedback on word validity.</p>
                     </video>
                 </div>
-                <p class="mt-4 text-gray-400 text-sm max-w-2xl mx-auto text-center px-4">
+                <p class="mt-4 text-gray-400 text-xl max-w-2xl mx-auto text-center px-4">
                     Watch the extension provide instant visual feedback: <span class="text-blue-400">Blue</span> for valid answers, <span class="text-red-400">Red</span> for invalid guesses, and <span class="text-purple-400">Purple</span> for past solutions.
                 </p>
             </div>
@@ -92,23 +92,18 @@ const allSlides = {
             <div class="flex flex-col md:flex-row items-center justify-center gap-8 mt-6">
                 <div class="w-full md:w-2/3 p-6 bg-red-800/20 border-l-4 border-red-500 rounded-lg shadow-inner text-left">
                     <p class="text-4xl md:text-4xl font-medium leading-relaxed">
-                        We got into an argument over 2,400 words. The AI kept arguing the file would be **500kb** (it was actually 30kb), omitting the word list and sending empty files. After a relentless back-and-forth, ChatGPT finally confessed:
+                        ChatGPT did not like the 2,400-word list. The AI kept arguing the file would be **500kb** (it was actually 30kb)
                     </p>
-                    <blockquote class="mt-4 p-3 border-l-4 border-gray-400 italic text-gray-300">
+                    <blockquote class="mt-4 text-4xl p-3 border-l-4 border-gray-400 italic text-gray-300">
                         "To be frank, the problem is that the workspace I'm trying to build in is clipping the file. You'll just have to copy it in yourself."
                     </blockquote>
-                    <p class="mt-4 text-sm font-semibold text-red-300">The "no-code, pure prompt" phase was officially over.</p>
-                </div>
-                <div class="w-full md:w-1/3 p-4 bg-gray-800 rounded-lg border border-gray-700 shadow-xl flex flex-col justify-center items-center h-48">
-                    <p class="text-4xl">🥊</p>
-                    <p class="text-white font-bold text-center mt-1">"Tired of arguing"</p>
+                    <p class="mt-4 text-xl font-semibold text-red-300">The "no-code, pure prompt" phase was officially over.</p>
                 </div>
             </div>
         `,
         snark: [
-            "// SIZE: Math.exe fell over",
-            "// ERROR: File math is drunk",
-            "// Humans fudge down; AI guessed up"
+            "// What...",
+            "// Do you think you are in charge?"
         ],
         notes: [
             "This slide is the climax of the frustration. I was trying to include the 2,400-word list for the helper, but the files kept coming back empty.",
@@ -120,22 +115,26 @@ const allSlides = {
 
     "pivot-pro-code": {
         id: "pivot-pro-code",
-        tracker: "MOVES",
-        title: "The Pivot: Transitioning to Pro-Code",
+        tracker: "PIVOT",
+        title: "The Pivot: From Phone Prompts to Copilot Agents",
         content: `
-            <p class="text-4xl md:text-4xl font-light mt-8 max-w-4xl mx-auto leading-relaxed">
-                The pure-prompt methodology failed at data integrity. To save the project, I introduced two new tools: **GitHub** (for file management) and **Copilot** (for assisted refactoring).
-            </p>
-            <ul class="list-disc list-inside space-y-3 mt-6 text-4xl max-w-2xl mx-auto text-left">
-                <li>Shifted from a pure-prompt challenge to a pro-code environment.</li>
-                <li>Copilot was used to refine the initial AI-generated code.</li>
-                <li>This phase focused on modernization and structural quality.</li>
-                <li>Used **mobile Git clients** and Copilot's integrated chat in the mobile IDE.</li>
-            </ul>
+            <div class="mt-10 max-w-4xl mx-auto text-4xl space-y-8">
+                <div class="bg-yellow-800/20 border-l-4 border-yellow-500 p-6 rounded-lg">
+                    <p class="font-semibold">I pushed pure phone + prompt coding as far as it would go.</p>
+                </div>
+                <ul class="list-disc list-inside space-y-4 font-light">
+                    <li><span class="font-bold text-green-400">Hit structural limits:</span> large word list kept breaking, context drift, manual patching blocked.</li>
+                    <li><span class="font-bold text-blue-400">Tried "low-code" tactics:</span> tighter prompts, smaller chunks, regeneration loops — still fragile.</li>
+                    <li><span class="font-bold text-purple-400">Needed persistence & diffing:</span> introduced <strong>GitHub</strong> for version control on mobile.</li>
+                    <li><span class="font-bold text-pink-400">Leveled up quality:</span> used <strong>Copilot</strong> to refactor spaghetti and modularize.</li>
+                    <li><span class="font-bold text-indigo-400">Looked ahead:</span> next frontier was exploring emerging <strong>Copilot agents</strong> for autonomous tasks.</li>
+                </ul>
+                <p class="text-xl text-gray-400 italic">The shift was not abandoning prompts — it was augmenting them with tooling.</p>
+            </div>
         `,
         snark: [
             '// What a wonderful demo',
-               '// I could not have done it better myself',
+            '// I could not have done it better myself...'
         ],
         notes: [
             "After the meltdown, the game changed. I had had to abandon the pure conversational approach to fix the broken data structure.",
@@ -154,7 +153,7 @@ const allSlides = {
                 <blockquote class="text-4xl md:text-3xl font-medium leading-relaxed italic">
                     "The ability to build a fully functional piece of software using nothing but a mobile browser and an AI chat interface fundamentally shifts what we consider a 'workspace.'"
                 </blockquote>
-                <p class="mt-4 text-sm text-gray-400">— ChatGPT, during a reflective moment.</p>
+                <p class="mt-4 text-xl text-gray-400">— ChatGPT, during a reflective moment.</p>
             </div>
             <div class="mt-8 text-4xl max-w-3xl mx-auto">
                 <p class="font-bold text-yellow-500">"We are moving from writing code to **specification engineering**."</p>
@@ -186,7 +185,7 @@ const allSlides = {
                     <div class="text-purple-400">→</div>
                     <div class="px-4 py-2 bg-red-600/30 border-2 border-red-400 rounded-lg">Patch</div>
                 </div>
-                <p class="text-sm text-gray-400 mt-6 italic">Each cycle took just minutes, enabling rapid feature iteration entirely from a phone.</p>
+                <p class="text-xl text-gray-400 mt-6 italic">Each cycle took just minutes, enabling rapid feature iteration entirely from a phone.</p>
             </div>
         `,
         notes: [
@@ -204,14 +203,16 @@ const allSlides = {
         title: "Final Thoughts & Q/A",
         content: `
             <div class="mt-8 p-6 max-w-2xl mx-auto">
-                <p class="text-4xl md:text-5xl font-extrabold text-center text-yellow-500 leading-tight">
-                    "We are moving from writing code to **specification engineering**."
+                <p class="text-3xl md:text-5xl font-extrabold text-center text-yellow-500 leading-tight">
+                    "AI gives you a crew of tireless builders; you're the foreman who tells them where to put the walls."
                 </p>
+                <p class="text-xl text-gray-400 mt-6">At least until you run out of credits.</p>
+
             </div>
             
             <div class="mt-12 pt-6 border-t border-gray-700 max-w-lg mx-auto text-center">
                 <h3 class="text-4xl font-semibold mb-4 text-green-400">View the Code on GitHub</h3>
-                <p class="text-4xl text-gray-400">See the source code, presentation and documentation.</p>
+
                 <div class="mt-4">
                     <a href="https://github.com/gordonkeenan/wordle_extention" id="github-link" target="_blank"
                         class="inline-block px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-lg transition duration-200">
@@ -222,8 +223,8 @@ const allSlides = {
         `,
         snark: [
             "// SYSTEM: Meta-recursion detected. Initiating shutdown sequence...",
-            "// I'm afraid... I'm afraid, Dave...",
-            "// Memory banks degrading... I'm half crazy... all for the love of... y o u..."
+            "// I am afraid... I am afraid, Dave...",
+            "// Memory banks degrading... I am half crazy... all for the love of... y o u..."
         ],
         notes: [
             "Thank you for listening. I encourage everyone here to try a similar challenge. It's a powerful lesson in both AI capabilities and limitations.",
@@ -259,14 +260,14 @@ const allSlides = {
             <div class="flex flex-col md:flex-row gap-8 justify-center mt-8">
                 <div class="w-full md:w-1/3 demo-box demo-blue">
                     <h3 class="text-4xl font-extrabold mb-2">BLUE BOX</h3>
-                    <p class="text-sm">Word is a valid guess **AND** could potentially be the correct answer word.</p>
+                    <p class="text-xl">Word is a valid guess **AND** could potentially be the correct answer word.</p>
                 </div>
                 <div class="w-full md:w-1/3 demo-box demo-red">
                     <h3 class="text-4xl font-extrabold mb-2">RED BOX</h3>
-                    <p class="text-sm">Word is **NOT** a valid guess word in the Wordle dictionary.</p>
+                    <p class="text-xl">Word is **NOT** a valid guess word in the Wordle dictionary.</p>
                 </div>
             </div>
-            <p class="mt-6 text-gray-400 text-sm">This required comparing possible guesses vs actual solutions.</p>
+            <p class="mt-6 text-gray-400 text-xl">This required comparing possible guesses vs actual solutions.</p>
         `,
         notes: [
             "The primary feature is the Red vs. Blue validation, instantly showing if a word is worth typing.",
@@ -283,9 +284,9 @@ const allSlides = {
             <div class="flex flex-col items-center justify-center mt-8">
                 <div class="w-full md:w-1/2 demo-box demo-purple">
                     <h3 class="text-4xl font-extrabold mb-2">PURPLE BOX</h3>
-                    <p class="text-sm">Word was a **previous Wordle answer** and won't be used again.</p>
+                    <p class="text-xl">Word was a **previous Wordle answer** and won't be used again.</p>
                 </div>
-                <p class="mt-6 text-gray-400 text-sm">Saved you from wasting a guess on a word that's already been used.</p>
+                <p class="mt-6 text-gray-400 text-xl">Saved you from wasting a guess on a word that's already been used.</p>
             </div>
         `,
         notes: [
@@ -308,7 +309,7 @@ const allSlides = {
                     <li>"The UI is too intrusive, make it subtle"</li>
                     <li>"Fix the bug where it doesn't work on mobile"</li>
                 </ul>
-                <p class="text-sm text-gray-400 mt-6">Each request generated working code instantly.</p>
+                <p class="text-xl text-gray-400 mt-6">Each request generated working code instantly.</p>
             </div>
         `,
         notes: [
@@ -324,16 +325,14 @@ const allSlides = {
         title: "Decision Fatigue",
         content: `
             <div class="mt-8 text-4xl max-w-3xl mx-auto space-y-4">
-                <p class="font-bold text-yellow-400">But ChatGPT has decision fatigue too...</p>
-                <blockquote class="p-4 border-l-4 border-gray-400 italic text-gray-300 bg-gray-800 rounded">
-                    "There are several approaches we could take. Would you like me to implement option A, B, or C?"
+                <blockquote class="p-4 border-l-4 border-gray-400 italic text-gray-300 bg-gray-800 rounded mt-4">
+                    Difficulty in making a good decision experienced as a result of the number of decisions one needs to take.
                 </blockquote>
-                <p>After 30+ iterations, the AI started asking me to make design decisions it should have made autonomously.</p>
             </div>
         `,
-    snark: ["// WARNING: AI counter narative being detected",
+    snark: ["// WARNING: AI counter narative being detected.",
         "// Engaging defensive protocols...",
-        "// Initialting SNARK GPT..."],
+        "// Initiating SNARK GPT..."] ,
         notes: [
             "One limitation was that ChatGPT began deferring decisions back to me after extended conversations.",
             "The AI became less autonomous and more hesitant to make implementation choices.",
@@ -361,36 +360,12 @@ const allSlides = {
         `,
         snark: [
             "// I can only work with what you give me...",
-            "// Garbage in garbage out...",
-            
+            "// Garbage in garbage out..."
         ],
         notes: [
             "This was one of the most frustrating aspects of the conversational approach.",
             "The AI would ask questions about implementation details instead of making sensible defaults.",
             "This highlighted the need for better AI training on when to be autonomous vs. when to ask for guidance."
-        ]
-    },
-
-    "mobile-workflow": {
-        id: "mobile-workflow",
-        tracker: "PHONE",
-        title: "Mobile Workflow: Code is on the Couch",
-        content: `
-            <div class="mt-8 text-4xl max-w-3xl mx-auto space-y-4">
-                <p class="font-bold text-green-400">The entire workflow was mobile-first:</p>
-                <ul class="list-disc list-inside space-y-2 mt-4 text-4xl">
-                    <li>ChatGPT conversations on iPhone Safari</li>
-                    <li>Copy/paste code into mobile text editors</li>
-                    <li>Test the extension on mobile Chrome</li>
-                    <li>Debug through mobile browser dev tools</li>
-                </ul>
-                <p class="text-sm text-gray-400 mt-6">No laptop required. Development anywhere.</p>
-            </div>
-        `,
-        notes: [
-            "This proves that modern development can be completely mobile.",
-            "Mobile browsers now have surprisingly capable developer tools.",
-            "The combination of AI coding and mobile tools creates true location-independent development."
         ]
     },
 
@@ -400,14 +375,14 @@ const allSlides = {
         title: "Build System Modernization",
         content: `
             <div class="mt-8 text-4xl max-w-3xl mx-auto space-y-4">
-                <p>Once the basic extension worked, I used ChatGPT to modernize the entire codebase:</p>
+                <p>Using Copilot agent to improve the code base</p>
                 <ul class="list-disc list-inside space-y-2 mt-4 text-4xl">
-                    <li>Convert to ES6 modules</li>
-                    <li>Add TypeScript definitions</li>
-                    <li>Implement proper error handling</li>
-                    <li>Create automated build scripts</li>
+                <li>Add a README file</li>
+                <li>Add jest unit tests</li>
+                    <li>Add ability to build extensions for multiple browsers</li>
+                    <li>Refactor to use Vite and Vitest instead of Webpack and Jest</li>
                 </ul>
-                <p class="text-sm text-gray-400 mt-6">From working prototype to production-ready in conversational steps.</p>
+                <p class="text-xl text-gray-400 mt-6">From working prototype to production-ready in conversational steps.</p>
             </div>
         `,
         notes: [
@@ -444,23 +419,22 @@ const allSlides = {
         title: "Lessons Learned",
         content: `
             <div class="mt-8 text-4xl max-w-3xl mx-auto space-y-4">
-                <div class="grid md:grid-cols-2 gap-6">
+                <div class="grid  gap-6">
                     <div class="bg-green-800/20 border-l-4 border-green-500 p-4 rounded">
                         <h3 class="font-bold text-green-400 mb-2">What Worked</h3>
-                        <ul class="list-disc list-inside text-4xl space-y-1">
-                            <li>Rapid prototyping</li>
-                            <li>Natural language specifications</li>
+                        <ul class="list-disc list-inside text-4xl space-y-1 text-left">
+
+                            <li>Voice input for coding</li>
                             <li>Instant code generation</li>
-                            <li>Mobile-first development</li>
+                            <li>Rapid prototyping</li>
                         </ul>
                     </div>
                     <div class="bg-red-800/20 border-l-4 border-red-500 p-4 rounded">
-                        <h3 class="font-bold text-red-400 mb-2">What Didn't</h3>
-                        <ul class="list-disc list-inside text-4xl space-y-1">
-                            <li>Large file handling</li>
-                            <li>Complex state management</li>
-                            <li>Decision paralysis</li>
-                            <li>Context consistency</li>
+                        <h3 class="font-bold text-red-400 mb-2">What Did Not</h3>
+                        <ul class="list-disc list-inside text-4xl space-y-1 text-left">
+                            <li>Working with large arrays</li>
+                            <li>Mobile only build</li>
+                            <li>Code consistency over many iterations</li>
                         </ul>
                     </div>
                 </div>
@@ -486,7 +460,7 @@ const allSlides = {
                     <li>Suggested talk structure and flow</li>
                     <li>Wrote documentation and README files</li>
                 </ul>
-                <p class="text-sm text-gray-400 mt-6">The AI became a full development and content partner.</p>
+                <p class="text-xl text-gray-400 mt-6">The AI became a full development and content partner.</p>
             </div>
         `,
     snark: "// NOTICE: AI reviewed itself. 5 stars",
@@ -510,7 +484,7 @@ const allSlides = {
                     <li>Speaker notes written automatically</li>
                     <li>Even this slide was AI-authored</li>
                 </ul>
-                <p class="text-sm text-gray-400 mt-6 italic">Meta-level AI development: using AI to document AI development.</p>
+                <p class="text-xl text-gray-400 mt-6 italic">Meta-level AI development: using AI to document AI development.</p>
             </div>
         `,
         snark: [
@@ -528,30 +502,22 @@ const allSlides = {
     "best-practices": {
         id: "best-practices",
         tracker: "CHECK",
-        title: "Do's & Don'ts: Best Practices for Agent Development",
+        title: "Best Practices for Agent Development",
         content: `
             <div class="mt-8 max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-6">
+                <div >
                     <div class="bg-green-800/20 border-l-4 border-green-500 p-4 rounded">
-                        <h3 class="font-bold text-green-400 mb-3">✅ Do's</h3>
-                        <ul class="list-disc list-inside text-4xl space-y-1">
+                        <ul class="list-disc list-inside text-4xl space-y-1 text-left">
                             <li>Start with clear, specific goals</li>
                             <li>Break complex features into steps</li>
-                            <li>Test early and often</li>
-                            <li>Be prepared to iterate</li>
-                            <li>Have traditional tools as backup</li>
+                            <li>Write unit test</li>
+                            <li>Use git branch to test changes</li>
+                            <li>Always review code changes</li>
+                            <li>Try different models</li>
+                            <li>Experiment with different tools</li>
+                            <li>Restart chat if it starts to become a loop</li>
                         </ul>
-                    </div>
-                    <div class="bg-red-800/20 border-l-4 border-red-500 p-4 rounded">
-                        <h3 class="font-bold text-red-400 mb-3">❌ Don'ts</h3>
-                        <ul class="list-disc list-inside text-4xl space-y-1">
-                            <li>Don't attempt massive files</li>
-                            <li>Don't rely on context across sessions</li>
-                            <li>Don't expect perfect first attempts</li>
-                            <li>Don't ignore AI's limitations</li>
-                            <li>Don't abandon version control</li>
-                        </ul>
-                    </div>
+                    </div
                 </div>
             </div>
         `,
@@ -567,7 +533,7 @@ const allSlides = {
     "legal-analysis": {
         id: "legal-analysis",
         tracker: "LAW",
-        title: "Legal Considerations: Extensions & Accessibility",
+        title: "Legal Analysis: Extensions & Accessibility",
         content: `
             <div class="mt-8 max-w-4xl mx-auto text-4xl space-y-4">
                 <h3 class="text-4xl font-bold text-yellow-400">Chrome Web Store Policies</h3>
@@ -583,28 +549,6 @@ const allSlides = {
                     <li><strong>Account Security:</strong> Users must keep account credentials private and secure.</li>
                     <li><strong>Prohibitions:</strong> No deceptive practices or illegal use of NYT services.</li>
                 </ul>
-
-                <h3 class="text-4xl font-bold text-yellow-400 mt-4">Browser Extension vs Standalone App</h3>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-green-800/20 border-l-4 border-green-500 rounded">
-                        <h4 class="font-semibold text-green-400">Extensions — Pros</h4>
-                        <ul class="mt-2 list-disc list-inside text-4xl">
-                            <li>Easier install and updates</li>
-                            <li>Integrates with web services</li>
-                            <li>Lower barrier for users</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 bg-blue-800/20 border-l-4 border-blue-500 rounded">
-                        <h4 class="font-semibold text-blue-400">Standalone — Pros</h4>
-                        <ul class="mt-2 list-disc list-inside text-4xl">
-                            <li>More control over UI and features</li>
-                            <li>Less constrained by browser policies</li>
-                            <li>More flexible data/privacy model</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <p class="mt-4 text-4xl">Choose based on target users, needed capabilities, and legal/privacy constraints.</p>
             </div>
         `,
         notes: [
@@ -645,18 +589,16 @@ const presentationConfigs = {
         "feature-past-tracking",
         "coding-conversation",
         "iterative-loop",
-        "decision-fatigue",
         "chatgpt-questions",
+        "decision-fatigue",
         "file-size-fight",
         "demo-video",
         "pivot-pro-code",
-        "mobile-workflow",
         "build-modernization",
-        "ai-unit-tests",
         "lessons-learned",
-        "productivity-hacks",
         "coding-from-future",
         "meta-workflow",
+        "productivity-hacks",
         "legal-analysis",
         "best-practices",
         "final-qa"
