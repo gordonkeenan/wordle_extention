@@ -100,7 +100,7 @@ const allSlides = {
                     <div class="grid md:grid-cols-3 gap-3">
                         <div class="p-3 bg-gray-700/40 rounded text-base">Inspect variables & state</div>
                         <div class="p-3 bg-gray-700/40 rounded text-base">Toggle test data & validation</div>
-                        <div class="p-3 bg-gray-700/40 rounded text-base">On-screen console/log capture</div>
+                        <div class="p-3 bg-gray-700/40 rounded text-base">On-screen logging</div>
                     </div>
                 </div>
                 <p class="mt-5 text-gray-400 text-lg">These workarounds made rapid iteration possible when traditional tooling wasn't available.</p>
@@ -192,7 +192,7 @@ const allSlides = {
         ]
     },
 
-    "iterative-loop": {
+        "iterative-loop": {
         id: "iterative-loop",
         tracker: "WORKFLOW",
         title: "The Iterative Development Loop",
@@ -211,6 +211,19 @@ const allSlides = {
                     <div class="px-4 py-2 bg-red-600/30 border-2 border-red-400 rounded-lg">Debug</div>
                 </div>
                 <p class="text-xl text-gray-400 mt-6 italic">Each cycle took just minutes, enabling rapid feature iteration entirely from a phone.</p>
+                <div class="mt-8 bg-gray-800/40 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <p class="text-2xl font-semibold text-blue-300 mb-3">By the Numbers:</p>
+                    <div class="flex justify-center gap-12 text-3xl">
+                        <div class="text-center">
+                            <p class="text-5xl font-bold text-green-400">60+</p>
+                            <p class="text-xl text-gray-400 mt-2">Prompt Exchanges</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-5xl font-bold text-yellow-400">~12</p>
+                            <p class="text-xl text-gray-400 mt-2">Packaged Zips Tested</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         `,
         notes: [
@@ -634,20 +647,46 @@ const allSlides = {
         title: "Best Practices for Agent Development",
         content: `
             <div class="mt-8 max-w-4xl mx-auto">
-                <div >
-                    <div class="bg-green-800/20 border-l-4 border-green-500 p-4 rounded">
-                        <ul class="list-disc list-inside text-4xl space-y-1 text-left">
-                            <li>Start with clear, specific goals</li>
-                            <li>Break complex features into steps</li>
-                            <li>Write unit test</li>
-                            <li>Use git branch to test changes</li>
-                            <li>Always review code changes</li>
-                            <li>Try different models</li>
-                            <li>Use basic models for simple tasks</li>
-                            <li>Experiment with different tools</li>
-                            <li>Restart chat if it starts to become a loop</li>
-                        </ul>
-                    </div
+                <div class="demo-box bg-green-800/20 border-l-4 border-green-500 p-6 rounded-lg">
+                    <h3 class="text-3xl font-extrabold mb-6 text-green-400">Keys to Success with AI Development</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="bg-gray-700/40 p-4 rounded-lg">
+                                <p class="text-2xl font-semibold text-blue-400 mb-2">🎯 Clear Goals</p>
+                                <p class="text-lg text-gray-300">Start with specific, well-defined objectives</p>
+                            </div>
+                            <div class="bg-gray-700/40 p-4 rounded-lg">
+                                <p class="text-2xl font-semibold text-purple-400 mb-2">🧩 Break It Down</p>
+                                <p class="text-lg text-gray-300">Divide complex features into manageable steps</p>
+                            </div>
+                            <div class="bg-gray-700/40 p-4 rounded-lg">
+                                <p class="text-2xl font-semibold text-yellow-400 mb-2">✅ Test Everything</p>
+                                <p class="text-lg text-gray-300">Write unit tests and validate continuously</p>
+                            </div>
+                            <div class="bg-gray-700/40 p-4 rounded-lg">
+                                <p class="text-2xl font-semibold text-pink-400 mb-2">🌿 Use Branches</p>
+                                <p class="text-lg text-gray-300">Test changes safely with git branches</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-700/40 p-4 rounded-lg">
+                                <p class="text-2xl font-semibold text-cyan-400 mb-2">👀 Review Always</p>
+                                <p class="text-lg text-gray-300">Never blindly accept generated code</p>
+                            </div>
+                            <div class="bg-gray-700/40 p-4 rounded-lg">
+                                <p class="text-2xl font-semibold text-orange-400 mb-2">🔄 Try Different Models</p>
+                                <p class="text-lg text-gray-300">Experiment to find the right tool</p>
+                            </div>
+                            <div class="bg-gray-700/40 p-4 rounded-lg">
+                                <p class="text-2xl font-semibold text-indigo-400 mb-2">💡 Be Smart</p>
+                                <p class="text-lg text-gray-300">Use simpler models for basic tasks</p>
+                            </div>
+                            <div class="bg-gray-700/40 p-4 rounded-lg">
+                                <p class="text-2xl font-semibold text-red-400 mb-2">🔁 Know When to Reset</p>
+                                <p class="text-lg text-gray-300">Restart if the chat loops or degrades</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `,
