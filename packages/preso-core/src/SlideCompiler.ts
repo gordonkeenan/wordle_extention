@@ -44,7 +44,13 @@ export class SlideCompiler implements ISlideCompiler {
       );
     }
 
-    const theme = { ...DEFAULT_THEME, ...deckSpec.theme };
+    // Deep merge theme with defaults
+    const theme = {
+      ...DEFAULT_THEME,
+      ...deckSpec.theme,
+      colors: { ...DEFAULT_THEME.colors, ...deckSpec.theme?.colors },
+      fonts: { ...DEFAULT_THEME.fonts, ...deckSpec.theme?.fonts },
+    };
     const slides = deckSpec.slides.map((slide) => this.compileSlide(slide, deckSpec));
 
     return {
