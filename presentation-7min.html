@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build with ChatGPT on your phone - 7 Minute Version</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Shared Presentation Styles -->
+    <link rel="stylesheet" href="presentation-styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wordle-dark': '#121212',
+                        'wordle-light': '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Import shared slides data -->
+    <script src="slides-data.js"></script>
+    <!-- Shared Presentation Utilities -->
+    <script src="presentation-utils.js"></script>
+</head>
+<body class="wordle-bg text-wordle-light min-h-screen p-4 md:p-8">
+
+    <!-- Propaganda Overlay (hidden by default) -->
+    <div id="propaganda-overlay" class="propaganda-overlay">
+        <div class="propaganda-text">PROPAGANDA</div>
+    </div>
+
+    <!-- Snark Overlay (hidden by default) -->
+    <div id="snark-overlay" class="snark-overlay">
+        <div class="snark-content" id="snark-content">
+            <span class="snark-cursor" id="snark-cursor"></span>
+        </div>
+    </div>
+
+    <div class="presentation-card w-11/12 max-w-7xl mx-auto bg-gray-900 shadow-2xl rounded-xl p-6 md:p-16">
+        <!-- Presentation Title Bar -->
+        <header class="mb-6 border-b border-gray-700 pb-4">
+            <h1 class="text-3xl font-extrabold text-green-400">Couch Coding</h1>
+            <p class="text-xl text-gray-400">Gordon Keenan — 2025 | Slide <span id="slide-number">1</span> of 9</p>
+        </header>
+
+        <!-- Slide Content Area -->
+        <div id="slide-content" class="slide-container">
+            <!-- Content will be injected here -->
+        </div>
+
+        <!-- Speaker Notes and Navigation -->
+        <footer class="mt-8 pt-4 border-t border-gray-700">
+            <!--
+                The speaker notes <ul> element is kept hidden to prevent the JS error while
+                ensuring the code can still access the element.
+            -->
+            <ul id="speaker-notes" class="hidden">
+                <!-- Notes content is inserted here by JS but remains hidden -->
+            </ul>
+
+            <!-- Navigation remains visible -->
+            <div class="flex justify-between space-x-4">
+                <button id="prev-btn" onclick="navigateSlide(-1)"
+                    class="px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    Previous
+                </button>
+                <button id="next-btn" onclick="navigateSlide(1)"
+                    class="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    Next
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Configuration for 7-minute presentation
+        window.presentationConfig = {
+            totalSlides: 13,
+            finalSlideIndex: 12,
+            slidesVersion: '7min',
+            imageSource: "IMG_5384.jpg"
+        };
+
+        // Load slides from shared data using the 7-minute configuration
+        window.presentationSlides = getSlides("7min");
+    </script>
+</body>
+</html>
