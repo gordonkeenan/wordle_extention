@@ -725,6 +725,42 @@ const allSlides = {
             "NYT terms: avoid reusing NYT content commercially without permission.",
             "Extensions are easier for users; standalone apps offer more control—pick based on goals and compliance needs."
         ]
+    },
+
+    "ai-critique": {
+        id: "ai-critique",
+        tracker: "CRITIQUE",
+        title: "AI Critiquing Presentation",
+        content: `
+            <div class="mt-8 max-w-4xl mx-auto text-4xl space-y-6">
+                <p class="text-5xl font-bold text-cyan-400">Next Step: Feed This Presentation Transcript to AI</p>
+                <div class="bg-gray-800/40 p-6 rounded-lg border-l-4 border-cyan-400">
+                    <p class="text-3xl mb-4">Ask ChatGPT to critique and improve this very presentation:</p>
+                    <ul class="list-disc list-inside space-y-3 text-3xl text-gray-300">
+                        <li>Analyze flow and narrative structure</li>
+                        <li>Suggest better transitions and examples</li>
+                        <li>Identify redundant or weak points</li>
+                        <li>Recommend visual improvements</li>
+                    </ul>
+                </div>
+                <p class="text-4xl italic text-yellow-400 text-center mt-6">
+                    "At this point, why don't I just let AI do the presentation too? Is a human even needed?"
+                </p>
+                <p class="text-3xl text-gray-400 text-center">
+                    The recursive loop of AI improving AI-generated work about AI development.
+                </p>
+            </div>
+        `,
+        snark: [
+            "// CRITIQUE: Analyzing own presentation...",
+            "// ERROR: Existential crisis detected.",
+            "// RECOMMENDATION: Hire human presenter for emotional connection."
+        ],
+        notes: [
+            "This slide represents the ultimate meta moment: using AI to critique AI-generated work about AI development.",
+            "The philosophical question emerges: if AI can write code, debug it, and now even critique presentations about itself, where does human creativity fit?",
+            "This recursive improvement loop shows both the power and the existential questions that AI development raises for creators."
+        ]
     }
 };
 
@@ -775,6 +811,7 @@ const presentationConfigs = {
         "github-pages-deploy",
         "productivity-hacks",
         "legal-analysis",
+        "ai-critique",
         "best-practices",
         "final-qa"
     ]
