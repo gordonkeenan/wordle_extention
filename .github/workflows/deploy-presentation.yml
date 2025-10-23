@@ -36,9 +36,9 @@ jobs:
         with:
           path: .
 
-  # Deployment job (only runs on push to main, not on PRs)
+  # Deployment job (runs on push to main and non-draft PRs)
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.pull_request.draft == false)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
