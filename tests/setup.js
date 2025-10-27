@@ -2,6 +2,7 @@
 
 // Setup DOM mocking
 import { beforeEach, vi } from 'vitest';
+import '@testing-library/jest-dom';
 
 beforeEach(() => {
     // Reset DOM

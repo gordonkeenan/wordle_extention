@@ -1,14 +1,40 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { copyFileSync, writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
   const isChrome = mode === 'chrome' || mode === 'chrome-dev';
   const isFirefox = mode === 'firefox' || mode === 'firefox-dev';
   const isUserscript = mode === 'userscript' || mode === 'userscript-dev';
+  const isPresentation = mode === 'presentation' || mode === 'presentation-dev';
   const isDevelopment = mode.includes('-dev') || mode === 'development';
   
   console.log(`Building for: ${mode} (${isDevelopment ? 'development' : 'production'})`);
+
+  // Presentation-specific config
+  if (isPresentation) {
+    return {
+      build: {
+        rollupOptions: {
+          input: {
+            main: resolve(__dirname, 'presentation-react.html'),
+          },
+        },
+        outDir: 'dist/presentation',
+        emptyOutDir: true,
+        target: 'es2020',
+        minify: !isDevelopment,
+        sourcemap: isDevelopment
+      },
+      plugins: [react()],
+      resolve: {
+        alias: {
+          '@': resolve(__dirname, 'src')
+        }
+      }
+    };
+  }
 
   return {
     build: {
