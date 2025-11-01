@@ -1,0 +1,68 @@
+/* Snark Terminal Box Styles */
+
+.preso-snark-terminal {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 2px solid #00ff00;
+  border-radius: 4px;
+  padding: 1rem;
+  font-family: 'Courier New', monospace;
+  color: #00ff00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  min-height: 100px;
+}
+
+.preso-snark-content {
+  overflow-x: auto;
+}
+
+.preso-snark-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.preso-snark-large .preso-snark-text {
+  font-size: 1.5rem;
+}
+
+.preso-snark-cursor {
+  animation: blink 1s step-end infinite;
+  color: #00ff00;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  50.01%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Terminal glitch effect (optional) */
+.preso-snark-terminal.glitching {
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
