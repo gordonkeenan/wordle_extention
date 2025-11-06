@@ -161,7 +161,7 @@ describe('Word Validation', () => {
         expect(testFuncs.isWordValid('zzzzz')).toBe(false);
         
         testFuncs.ARCHIVE.add('cigar');
-        expect(testFuncs.isWordValid('cigar')).toBe(true);
+        expect(testFuncs.isWordValid('gla')).toBe(true);
     });
 });
 
@@ -178,7 +178,7 @@ describe('Row Detection (getRows)', () => {
         document.body.appendChild(board);
 
         const rows = testFuncs.getRows();
-        expect(rows.length).toBe(6); // Total 6 rows in Wordle
+        expect(rows.length).toBe(5); // Total 6 rows in Wordle
     });
 
     it('should detect rows using .board-row selector', () => {
@@ -252,7 +252,7 @@ describe('Guess Extraction (getGuessFromRow)', () => {
             row.appendChild(tile);
         });
         const guess = testFuncs.getGuessFromRow(row);
-        expect(guess).toBe('ABCDE');
+        expect(guess).toBe('ABDE');
     });
 
     it('should handle rows with more than 5 tiles', () => {

@@ -1,0 +1,185 @@
+name: AI-Powered Test Failure Fix
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Fix mode: comment (post suggestion as PR comment) or fix (create new PR with fixes)'
+        required: true
+        default: 'comment'
+        type: choice
+        options:
+          - comment
+          - fix
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      tests_failed: ${{ steps.test_run.outcome == 'failure' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run tests
+        id: test_run
+        continue-on-error: true
+        run: npm run test:run
+
+      - name: Save test results
+        if: steps.test_run.outcome == 'failure'
+        run: |
+          npm run test:run > test-results.txt 2>&1 || true
+          echo "Tests failed - results saved"
+
+      - name: Upload test results
+        if: steps.test_run.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results.txt
+
+  ai-suggest-fix-comment:
+    name: AI Suggest Fix (Comment)
+    needs: test
+    if: |
+      needs.test.outputs.tests_failed == 'true' &&
+      (github.event_name == 'pull_request' ||
+       (github.event_name == 'workflow_dispatch' && inputs.mode == 'comment'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download test results
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results
+
+      - name: Read test results
+        id: test_results
+        run: |
+          RESULTS=$(cat test-results.txt)
+          echo "results<<EOF" >> $GITHUB_OUTPUT
+          echo "$RESULTS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Issue for AI Agent
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '[AI Task] Analyze test failures and suggest fixes',
+              body: `## AI Agent Task: Analyze Test Failures
+
+              **Mode:** Comment only (do not create PR)
+
+              **Context:**
+              - PR: #${{ github.event.pull_request.number }}
+              - Commit: ${{ github.sha }}
+              - Tests have failed and need analysis
+
+              **Task Instructions:**
+              1. Analyze the failing tests shown below
+              2. Identify the root cause of the failures
+              3. Suggest specific code changes to fix the issues
+              4. Post your analysis and suggestions as a comment on PR #${{ github.event.pull_request.number }}
+
+              **Test Results:**
+              \`\`\`
+              ${{ steps.test_results.outputs.results }}
+              \`\`\`
+
+              **Important:** Do NOT create a new PR - only comment on the existing PR with your suggestions.
+
+              @copilot please analyze these test failures and suggest fixes`,
+              labels: ['ai-task', 'test-failure', 'needs-fix']
+            });
+            console.log(`Created issue: ${issue.data.html_url}`);
+
+  ai-create-fix-pr:
+    name: AI Create Fix PR
+    needs: test
+    if: |
+      needs.test.outputs.tests_failed == 'true' &&
+      github.event_name == 'workflow_dispatch' &&
+      inputs.mode == 'fix'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download test results
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results
+
+      - name: Read test results
+        id: test_results
+        run: |
+          RESULTS=$(cat test-results.txt)
+          echo "results<<EOF" >> $GITHUB_OUTPUT
+          echo "$RESULTS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Issue for AI Agent - Fix Mode
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '[AI Task] Fix test failures and create PR',
+              body: `## AI Agent Task: Fix Test Failures
+
+              **Mode:** Create new PR with fixes
+
+              **Context:**
+              - Source PR: #${{ github.event.pull_request.number || 'N/A' }}
+              - Commit: ${{ github.sha }}
+              - Tests have failed and need fixes
+
+              **Task Instructions:**
+              1. Analyze the failing tests shown below
+              2. Identify the root cause of the failures
+              3. Make the necessary code changes to fix the issues
+              4. Create a new PR with your fixes
+
+              **Test Results:**
+              \`\`\`
+              ${{ steps.test_results.outputs.results }}
+              \`\`\`
+
+              **PR Requirements:**
+              - Title: "AI Fix: Resolve test failures from ${{ github.sha }}"
+              - Include clear description of what was broken and how it was fixed
+              - Ensure all tests pass after the fix
+
+              @copilot please fix these test failures and create a PR`,
+              labels: ['ai-task', 'test-failure', 'auto-fix']
+            });
+            console.log(`Created issue: ${issue.data.html_url}`);
