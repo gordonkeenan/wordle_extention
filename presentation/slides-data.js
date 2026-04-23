@@ -839,13 +839,24 @@ function getPropagandaSlideIndex(param) {
     return slidesToCheck.findIndex(slide => slide && slide.id === 'coding-from-future');
 }
 
+// Function to find slide index that should trigger glitch overlay (accepts either slides array or config name)
+function getGlitchSlideIndex(param) {
+    let slidesToCheck = [];
+    if (Array.isArray(param)) slidesToCheck = param;
+    else if (typeof param === 'string') slidesToCheck = getSlides(param);
+    else slidesToCheck = [];
+
+    return slidesToCheck.findIndex(slide => slide && slide.id === 'final-qa');
+}
+
 // Export for CommonJS environments
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { allSlides, presentationConfigs, getSlides, getPropagandaSlideIndex };
+    module.exports = { allSlides, presentationConfigs, getSlides, getPropagandaSlideIndex, getGlitchSlideIndex };
 }
 
 // Also attach to window for browser usage
 if (typeof window !== 'undefined') {
     window.getSlides = getSlides;
     window.getPropagandaSlideIndex = getPropagandaSlideIndex;
+    window.getGlitchSlideIndex = getGlitchSlideIndex;
 }

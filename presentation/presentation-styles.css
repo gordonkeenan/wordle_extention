@@ -448,3 +448,166 @@ body {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.1); opacity: 0.8; }
 }
+
+/* Glitch overlay styles - follows same pattern as propaganda overlay */
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black; /* Opaque black background */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.glitch-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.glitch-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glitch-text {
+    position: relative;
+    z-index: 10;
+}
+
+.glitch-effect {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    color: #00ff00;
+    font-weight: bold;
+    animation: glitchShake 0.3s infinite, glitchSkew 0.5s infinite;
+    text-shadow: 
+        0.05em 0 0 rgba(255, 0, 0, 0.75),
+        -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+        0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    line-height: 1.4;
+    text-align: center;
+    white-space: pre-line;
+    max-width: 90vw;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.glitch-effect.typing {
+    position: relative;
+}
+
+.glitch-effect.typing::after {
+    content: '█';
+    display: inline;
+    animation: terminalBlink 1s infinite;
+    color: #00ff00;
+}
+
+.scan-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 0, 0.1) 2px,
+        rgba(0, 255, 0, 0.1) 4px
+    );
+    animation: scanLine 2s linear infinite;
+}
+
+.noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+    background-size: 4px 4px;
+    animation: noiseFlicker 0.2s infinite;
+}
+
+@keyframes glitchShake {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitchSkew {
+    0% { transform: skew(0deg); }
+    10% { transform: skew(1deg); }
+    20% { transform: skew(0deg); }
+    30% { transform: skew(-1deg); }
+    40% { transform: skew(0deg); }
+    50% { transform: skew(2deg); }
+    60% { transform: skew(0deg); }
+    70% { transform: skew(-2deg); }
+    80% { transform: skew(0deg); }
+    90% { transform: skew(1deg); }
+    100% { transform: skew(0deg); }
+}
+
+@keyframes scanLine {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes noiseFlicker {
+    0% { opacity: 0.1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.1; }
+}
+
+/* Fade out only the glitch content, not the black background */
+.glitch-container.fade-out .glitch-effect {
+    animation: fadeOutText 6s ease-in-out forwards;
+}
+
+.glitch-container.fade-out .scan-lines {
+    animation: scanLine 2s linear infinite, fadeOutText 6s ease-in-out forwards;
+}
+
+.glitch-container.fade-out .noise {
+    animation: noiseFlicker 0.2s infinite, fadeOutText 6s ease-in-out forwards;
+}
+
+@keyframes terminalBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes fadeOutText {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Keep the black screen permanently after slide is marked as black-screen */
+.slide-container.black-screen {
+    background-color: black !important;
+}
+
+.slide-container.black-screen * {
+    color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+}

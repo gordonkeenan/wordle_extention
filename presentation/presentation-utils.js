@@ -238,6 +238,57 @@ function triggerFallingTiles() {
     });
 }
 
+// Function to type text in the glitch effect element
+function typeGlitchText(element, textLines, onComplete) {
+    if (!element || !Array.isArray(textLines)) {
+        console.error('Invalid element or text lines for glitch typing');
+        if (onComplete) onComplete();
+        return;
+    }
+    
+    // Clear existing content and start typing
+    element.textContent = '';
+    element.classList.add('typing');
+    
+    let currentLineIndex = 0;
+    let currentCharIndex = 0;
+    let currentText = '';
+    
+    const typeInterval = setInterval(() => {
+        // If we've finished all lines, stop and complete
+        if (currentLineIndex >= textLines.length) {
+            clearInterval(typeInterval);
+            element.classList.remove('typing');
+            if (onComplete) onComplete();
+            return;
+        }
+        
+        const currentLine = textLines[currentLineIndex];
+        
+        // If we've finished the current line
+        if (currentCharIndex >= currentLine.length) {
+            currentText += '\n'; // Add line break
+            element.textContent = currentText;
+            currentLineIndex++;
+            currentCharIndex = 0;
+            
+            // Pause between lines
+            setTimeout(() => {
+                // Continue with next line after pause
+            }, 300);
+            return;
+        }
+        
+        // Add the next character
+        currentText = textLines.slice(0, currentLineIndex).join('\n') + 
+                     (currentLineIndex > 0 ? '\n' : '') + 
+                     currentLine.substring(0, currentCharIndex + 1);
+        element.textContent = currentText;
+        currentCharIndex++;
+        
+    }, 50); // 50ms between characters for terminal-like typing
+}
+
 // Snark overlay function
 function showSnarkOverlay(snarkText, isLarge = false) {
     const overlay = document.getElementById('snark-overlay');
@@ -432,6 +483,50 @@ function setupKeyboardListeners() {
                 setTimeout(() => {
                     overlay.classList.remove('active');
                 }, 3000);
+                return; // Don't advance slide on this specific slide
+            }
+            
+            // Special behavior for glitch overlay slide (final-qa)
+            const glitchSlideIndex = (typeof getGlitchSlideIndex === 'function') ? 
+                getGlitchSlideIndex(window.presentationConfig.slidesVersion) : -1;
+            if (currentSlideIndex === glitchSlideIndex) {
+                console.log('Triggering glitch overlay for slide at index:', glitchSlideIndex);
+                const overlay = document.getElementById('glitch-overlay');
+                const glitchContainer = overlay?.querySelector('.glitch-container');
+                const glitchTextElement = document.getElementById('glitch-text-content');
+                
+                // Get the snark text from the current slide
+                const currentSlide = window.presentationSlides[currentSlideIndex];
+                const snarkText = currentSlide?.snark || [
+                    "// SYSTEM: Meta-recursion detected. Initiating shutdown sequence...",
+                    "// I am afraid... I am afraid, Dave...",
+                    "// Memory banks degrading... I am half crazy... all for the love of... y o u..."
+                ];
+                
+                console.log('Showing glitch overlay with terminal text...');
+                
+                // Show glitch overlay immediately
+                overlay.classList.add('active');
+                
+                // Type out the snark text in the glitch effect instead of terminal
+                typeGlitchText(glitchTextElement, snarkText, () => {
+                    // After typing completes, start fade out sequence
+                    setTimeout(() => {
+                        if (glitchContainer) {
+                            glitchContainer.classList.add('fade-out');
+                        }
+                        
+                        // After 6 seconds, fade slide content to black but keep black overlay
+                        setTimeout(() => {
+                            console.log('Fading slide content to black, keeping black screen...');
+                            const slideContainer = document.querySelector('.slide-container');
+                            slideContainer.classList.add('black-screen');
+                            // DON'T hide the overlay - keep the black screen visible
+                            // overlay.style.opacity = '0'; // REMOVED
+                        }, 6000);
+                    }, 2000); // 2 second pause after typing completes
+                });
+                
                 return; // Don't advance slide on this specific slide
             }
             
